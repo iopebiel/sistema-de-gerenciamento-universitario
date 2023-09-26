@@ -108,27 +108,6 @@ def login():
             # Credenciais inválidas, mostrar mensagem de erro
             return "Credenciais inválidas. Tente novamente."
 
-        # Outras rotas e configurações do aplicativo
-        # Processar o formulário de login
-        email = request.form['email']
-        senha = request.form['senha']
-
-        conexao = sqlite3.connect('usuarios.db')
-        cursor = conexao.cursor()
-
-        cursor.execute('SELECT senha FROM alunos WHERE email = ?', (email,))
-        senha_hash = cursor.fetchone()
-
-        conexao.close()
-
- 
-        if usuario and check_password_hash(usuario[2], senha):
-        # Credenciais válidas
-            session['usuario'] = senha_hash[1]
-            return render_template('opcoes.html')
-        else:
-        # Credenciais inválidas
-            return "Credenciais inválidas"
 
     # Se o método for GET, apenas renderize a página de login
     return render_template('login.html')
