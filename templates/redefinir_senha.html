@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redefinir Senha</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #388dfd;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 350px;
+        }
+        .form-container h1 {
+            text-align: center;
+            margin-bottom: 17px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .hidden {
+            display: none;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+        input {
+            width: 95%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f0f0f0;
+            color: #333;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        button {
+            display: block;
+            width: 50%;
+            padding: 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            float: right;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+<body>
+    <div class="form-container">
+    <h1>Redefinição de Senha</h1>
+
+    <!-- Etapa 1: Informar Email -->
+    <form id="etapa1-form" action="/codigo_email" method="post">
+        <h2>Etapa 1:</h2>
+        <p>Informar Email.</p>
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required>
+        <button type="button" onclick="verificarEmail()">Próxima Etapa</button>
+    </form>
+
+    <!-- Etapa 2: Inserir Código de Autenticação (inicialmente oculta) -->
+    <form id="etapa2-form" class="hidden" method="post">
+        <h2>Etapa 2:</h2>
+        <p>Inserir Código de Autenticação</p>
+        <label for="codigo">Código de Autenticação:</label>
+        <input type="text" id="codigo" name="codigo" required>
+        <button type="button" onclick="verificarCodigo()">Próxima Etapa</button>
+    </form>
+
+    <!-- Etapa 3: Redefinir Senha (inicialmente oculta) -->
+    <form id="etapa3-form" action="/redefinir_senha" class="hidden" method="post">
+        <h2>Etapa 3:</h2>
+        <p>Redefinir Senha</p>
+        <label for="nova-senha">Nova Senha:</label>
+        <input type="password" id="nova-senha" name="nova-senha" required>
+        <label for="confirmar-senha">Confirmar Senha:</label>
+        <input type="password" id="confirmar-senha" name="confirmar-senha" required>
+        <button type="submit">Redefinir Senha</button>
+    </form>
+
+    <script>
+        function verificarEmail() {
+            // Aqui você implementaria a lógica para verificar o e-mail no lado do cliente
+            // Se o e-mail for válido, você pode exibir a Etapa 2
+            document.getElementById('etapa1-form').classList.add('hidden');
+            document.getElementById('etapa2-form').classList.remove('hidden');
+        }
+
+        function verificarCodigo() {
+            // Aqui você implementaria a lógica para verificar o código no lado do cliente
+            // Se o código for válido, você pode exibir a Etapa 3
+            document.getElementById('etapa2-form').classList.add('hidden');
+            document.getElementById('etapa3-form').classList.remove('hidden');
+        }
+    </script>
+    </div>
+</body>
+</html>
