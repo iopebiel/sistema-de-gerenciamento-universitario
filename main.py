@@ -5,6 +5,7 @@ import re
 import sqlite3
 
 from flask import Flask, flash, redirect, render_template, request, session
+from flask_login import login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
@@ -123,8 +124,8 @@ def codigo_email():
     verification_codes[email] = codigo_verificacao  # Armazene o código associado ao e-mail
     smtp_server = 'smtp.gmail.com'
     smtp_port = 587
-    smtp_username = 'gabriel.iope@aluno.ifsp.edu.br'
-    smtp_password = 'Biel7920311'
+    smtp_username = '...'
+    smtp_password = '...'
 
     # Crie a mensagem de e-mail
     msg = MIMEText(f'Seu código de verificação: {codigo_verificacao}')
@@ -136,7 +137,7 @@ def codigo_email():
     server = smtplib.SMTP(smtp_server, smtp_port)
     server.starttls()
     server.login(smtp_username, smtp_password)
-    server.sendmail('gabriel.iope@aluno.ifsp.edu.br', [email], msg.as_string())
+    server.sendmail('...', [email], msg.as_string())
     server.quit()
 
    
@@ -160,7 +161,20 @@ def redefinir_senha():
 
 @app.route('/inicio')
 def inicio():
-    return render_template ('inicio.html')
+    email = session['usuario']
+    conexao = sqlite3.connect('usuarios.db')
+    cursor = conexao.cursor()
+    cursor.execute('SELECT nome, curso FROM alunos WHERE email = ?', (email,))
+    usuario_info = cursor.fetchone()
+    nome_usuario, curso_usuario = usuario_info
+    
+    return render_template('inicio.html', nome=nome_usuario, curso=curso_usuario)
+
+@app.route('/perfil')
+def perfil():
+    usuario = current_user
+
+    return render_template('perfil.html', usuario=usuario)
 
 if __name__ == '__main__':
     criar_tabela_alunos()

@@ -87,48 +87,64 @@
 
         .perfil h1 {
             font-size: 1.2rem;
+            margin: 0;
+            text-align: left;
         }
 
-        .perfil p {
+        .perfil h2 {
             font-size: 0.8rem;
+            margin: 5;
+            text-align: left;
+            bottom: 5px;
         }
         /* Estilo para o widget de horário de aula */
-.widget {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    width: 80%;
-    margin: 0 auto;
-}
+        .widget {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            margin: 0 auto;
+        }
+        .table-container {
+                    overflow-x: auto; /* Torna a tabela rolável horizontalmente */
+         }
 
-/* Estilo para a tabela de horário */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            overflow-x: auto; /* Torna a tabela rolável horizontalmente */
+        }
 
-th, td {
-    padding: 8px 12px;
-    text-align: left;
-    border-bottom: 1px solid #ccc;
-}
+        th, td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
 
-th {
-    background-color: #f0f0f0;
-}
+        th {
+            background-color: #f0f0f0;
+        }
+        @media screen and (max-width: 600px) {
+            /* Estilo para telas menores (menos de 600px de largura) */
+            table {
+                font-size: 14px; /* Reduz o tamanho da fonte */
+            }
+        }
     </style>
 </head>
 <body>
     <body>
         <header>
             <div class="perfil">
+                <a href="/perfil">
                 <img src="/cadastro_login_pi/templates/foto_perfil.jpg" alt="Foto de Perfil">
             <div>    
-                <h1>Nome do Usuário</h1>
-                <p>Curso: Nome do Curso</p>
+                <h1>{{ nome }}</h1> 
+                <h2>Curso: {{ curso}}</h2>
             </div>
+            </a>
             </div>
             <nav>
                 <ul>
@@ -149,6 +165,7 @@ th {
     </div>
         <div class="widget">
             <h2>Horário de Aula</h2>
+            <div class="table-container">
             <table>
                 <tr>
                     <th>Horário</th>
@@ -183,6 +200,7 @@ th {
                     <td> Banco de dados</td>
                 </tr>
                 <!-- Adicione mais linhas para os outros horários -->
+            </div>
             </table>
         <p>Logo os horários de suas aulas estarão disponíveis por aqui.</p>
     </div>
