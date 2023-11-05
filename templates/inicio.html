@@ -4,99 +4,9 @@
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Início</title>
+    <link rel="stylesheet" type="text/css" href="../static/config/styles.css">
     <style>
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
 
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        nav li {
-            display: inline;
-            margin-right: 20px;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #fff;
-        }
-
-        .content {
-            padding: 20px;
-            background-color: #fff;
-            margin: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .content h2 {
-            margin-top: 0;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        ul li {
-            margin-bottom: 10px;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #388dfd;
-        }
-        .section {
-            padding: 20px;
-            background-color: #fff;
-            margin: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-        .welcome-message {
-        font-size: 20px;
-        text-align: center;
-        }
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
-            text-align: right;
-        }
-
-        .perfil {
-            margin-right: 20px;
-            margin-top: 20px;
-        }
-
-        .perfil img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-        }
-
-        .perfil h1 {
-            font-size: 1.2rem;
-            margin: 0;
-            text-align: left;
-        }
-
-        .perfil h2 {
-            font-size: 0.8rem;
-            margin: 5;
-            text-align: left;
-            bottom: 5px;
-        }
         /* Estilo para o widget de horário de aula */
         .widget {
             background-color: #fff;
@@ -132,14 +42,17 @@
                 font-size: 14px; /* Reduz o tamanho da fonte */
             }
         }
+        .hidden {
+        display: none;
+        }
+
     </style>
 </head>
 <body>
-    <body>
         <header>
             <div class="perfil">
                 <a href="/perfil">
-                <img src="/cadastro_login_pi/templates/foto_perfil.jpg" alt="Foto de Perfil">
+                <img src="../static/imagem/{{ nome }}.jpg" alt="Foto de Perfil">
             <div>    
                 <h1>{{ nome }}</h1> 
                 <h2>Curso: {{ curso}}</h2>
@@ -148,63 +61,63 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="#">Início</a></li>
-                    <li><a href="#">Mensagens</a></li>
-                    <li><a href="#">Relatório</a></li>
-                    <li><a href="#">Disciplinas</a></li>
+                    <li><a href="/inicio">Início</a></li>
+                    <li><a href="/relatorio">Relatório</a></li>
+                    <li><a href="/disciplina">Disciplinas</a></li>
+                    <li><a href="/logout">Sair</a></li>
                 </ul>
             </nav>
         </header>
-    
-        <div class="content">
-    </body>
-    </html>
+    <div class="content">
+    <button id="toggleTab">Mensagens</button><div id="tab" class="hidden">
+        <h2>Guia de mensagens</h2>
+        <p>Esta é uma guia de exemplo.</p>
+    </div>
+    <script src="../static/config/script.js"></script>
     <div class="welcome-message">
         <h1>Bem-vindo à Página de Início</h1>
         <p>Esta é a nossa página de início. Sinta-se à vontade para explorar!</p>
     </div>
-        <div class="widget">
-            <h2>Horário de Aula</h2>
-            <div class="table-container">
-            <table>
-                <tr>
-                    <th>Horário</th>
-                    <th>Segunda-feira</th>
-                    <th>Terça-feira</th>
-                    <th>Quarta-feira</th>
-                    <th>Quinta-feira</th>
-                    <th>Sexta-feira</th>
-                </tr>
-                <tr>
-                    <td>07:00 - 08:40</td>
-                    <td> Complexidade de Algoritmos</td>
-                    <td> Projeto interdisciplinar</td>
-                    <td> Sistemas Operacionais 2</td>
-                    <td>-</td>
-                    <td> Teoria dos Grafos</td>
-                </tr>
-                <tr>
-                    <td>8:50 - 10:30</td>
-                    <td> Complexidade de Algoritmos</td>
-                    <td> Arquitetura e Organização de Computadores</td>
-                    <td> Sistemas Operacionais 2</td>
-                    <td> Matemática Discreta</td>
-                    <td> Banco de dados</td>
-                </tr>
-                <tr>
-                    <td>10:40 - 12:20</td>
-                    <td>-</td>
-                    <td> Arquitetura e Organização de Computadores</td>
-                    <td>-</td>
-                    <td> Matemática Discreta</td>
-                    <td> Banco de dados</td>
-                </tr>
-                <!-- Adicione mais linhas para os outros horários -->
-            </div>
-            </table>
-        <p>Logo os horários de suas aulas estarão disponíveis por aqui.</p>
+    <div class="section">
+        <h2>Horário de Aula</h2>
+        <div class="table-container">
+        <table>
+            <tr>
+                <th>Horário</th>
+                <th>Segunda-feira</th>
+                <th>Terça-feira</th>
+                <th>Quarta-feira</th>
+                <th>Quinta-feira</th>
+                <th>Sexta-feira</th>
+            </tr>
+            <tr>
+                <td>07:00 - 08:40</td>
+                <td> Complexidade de Algoritmos</td>
+                <td> Projeto interdisciplinar</td>
+                <td> Sistemas Operacionais 2</td>
+                <td>-</td>
+                <td> Teoria dos Grafos</td>
+            </tr>
+            <tr>
+                <td>8:50 - 10:30</td>
+                <td> Complexidade de Algoritmos</td>
+                <td> Arquitetura e Organização de Computadores</td>
+                <td> Sistemas Operacionais 2</td>
+                <td> Matemática Discreta</td>
+                <td> Banco de dados</td>
+            </tr>
+            <tr>
+                <td>10:40 - 12:20</td>
+                <td>-</td>
+                <td> Arquitetura e Organização de Computadores</td>
+                <td>-</td>
+                <td> Matemática Discreta</td>
+                <td> Banco de dados</td>
+            </tr>
+        </div>
+        </table>
+    <p>Logo os horários de suas aulas estarão disponíveis por aqui.</p>
     </div>
-
     <div class="section">
         <h2>Minha agenda</h2>
         <p>Meus compromissos com prazo de entrega!</p>
