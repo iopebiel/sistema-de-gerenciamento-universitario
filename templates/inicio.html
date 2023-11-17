@@ -52,7 +52,7 @@
         <header>
             <div class="perfil">
                 <a href="/perfil">
-                <img src="../static/imagem/{{ nome }}.jpg" alt="Foto de Perfil">
+            <img src="../static/imagem/foto_perfil.webp" alt="Foto de Perfil">
             <div>    
                 <h1>{{ nome }}</h1> 
                 <h2>Curso: {{ curso}}</h2>
@@ -80,41 +80,20 @@
     </div>
     <div class="section">
         <h2>Horário de Aula</h2>
-        <div class="table-container">
-        <table>
+        <table border="1">
             <tr>
+                <th>Dia</th>
                 <th>Horário</th>
-                <th>Segunda-feira</th>
-                <th>Terça-feira</th>
-                <th>Quarta-feira</th>
-                <th>Quinta-feira</th>
-                <th>Sexta-feira</th>
+                <th>Disciplina</th>
+
             </tr>
-            <tr>
-                <td>07:00 - 08:40</td>
-                <td> Complexidade de Algoritmos</td>
-                <td> Projeto interdisciplinar</td>
-                <td> Sistemas Operacionais 2</td>
-                <td>-</td>
-                <td> Teoria dos Grafos</td>
-            </tr>
-            <tr>
-                <td>8:50 - 10:30</td>
-                <td> Complexidade de Algoritmos</td>
-                <td> Arquitetura e Organização de Computadores</td>
-                <td> Sistemas Operacionais 2</td>
-                <td> Matemática Discreta</td>
-                <td> Banco de dados</td>
-            </tr>
-            <tr>
-                <td>10:40 - 12:20</td>
-                <td>-</td>
-                <td> Arquitetura e Organização de Computadores</td>
-                <td>-</td>
-                <td> Matemática Discreta</td>
-                <td> Banco de dados</td>
-            </tr>
-        </div>
+            {% for disciplina in horarios %}
+                <tr>
+                    <td>{{ disciplina[3] }}</td>
+                    <td>{{ disciplina[4] }} - {{disciplina[5]}} aulas</td>
+                    <td>{{ disciplina[1] }}</td>
+                </tr>
+            {% endfor %}
         </table>
     <p>Logo os horários de suas aulas estarão disponíveis por aqui.</p>
     </div>

@@ -54,6 +54,10 @@ button:hover {
     color: #FF0000;
 }
 
+.success {
+    color: #00ff00;
+}
+
 .alert {
     color: #e3c502;;
 }

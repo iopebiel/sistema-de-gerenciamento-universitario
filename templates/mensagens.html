@@ -39,32 +39,9 @@
         <nav>
             <ul>
                 <li><a href="/inicio">Início</a></li>
-                <li><a href="/mensagens">Mensagens</a></li>
                 <li><a href="/relatorio">Relatório</a></li>
+                <li><a href="/disciplina">Disciplinas</a></li>
                 <li><a href="/logout">Sair</a></li>
             </ul>
         </nav>
     </header>
-    <main>
-        <div class="content">
-            <h1>Minhas disciplinas<a href="/disciplina/adicionar" class="adicionar-disciplina-button">
-                <span>+</span>
-            </a></h1>
-            <ul class="lista-disciplinas">
-                    {% for disciplina in disciplinas %}
-                    <li class="section">
-                        <h3>{{ disciplina[1] }}</h3>
-                        <p>Código: {{ disciplina[0] }}</p>
-                        <p>Professor: {{ disciplina[2] }}</p>
-                        <p>Horário: {{ disciplina[3] }}, {{ disciplina[4] }}</p>
-                        <p>Carga Horaria: {{ disciplina[6] }} horas.</p>
-                        <a class="detalhes-link" href="#">Detalhes</a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-                <!-- Adicione mais disciplinas à lista conforme necessário -->
-            </ul>
-    </main>
-</body>
-</html>

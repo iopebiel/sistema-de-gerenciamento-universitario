@@ -22,12 +22,12 @@
         {% if messages %}
             <ul class="flashes">
             {% for message in messages %}
-                <div class="alert alert-{{ message}}">{{ message}}</div>
+                <div class="{{ ctaegory}}">{{ message}}</div>
             {% endfor %}
             </ul>
         {% endif %}
     {% endwith %}
-    <h1>Login</h1>
+    <h1>SGU</h1>
     <form method="POST" action="/login" class="form-group">
         <div class="input-container">
             <label for="email">Email:</label>
@@ -41,7 +41,7 @@
     </form>
     <div class="links">
         <p></p> Ainda não tem uma conta? <a href="/cadastro">Cadastre-se</a></p>
-        <p>Não consegue acessar sua conta? <a href="/redefinir_senha">Redefinir senha</a></p>
+        <p>Não consegue acessar sua conta? <a href="/redefinirsenha">Redefinir senha</a></p>
     </div>
 </body>
 </html>

@@ -81,7 +81,7 @@
     <header>
         <div class="perfil">
             <a href="/perfil">
-            <img src="../static/imagem/{{ usuario[1] }}.jpg" alt="Foto de Perfil">
+            <img src="../static/imagem/foto_perfil.webp" alt="Foto de Perfil">
         <div>    
             <h1>{{usuario[1]}}</h1> 
             <h2>Curso: {{usuario[4]}}</h2>
@@ -105,6 +105,15 @@
             </div>
         <div>
             <div>
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <ul class="flashes">
+                        {% for message in messages %}
+                            <div class="{{ category}}">{{ message}}</div>
+                        {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {% endwith %}
                 <h2>Nome: {{ usuario[1] }}</h2>
                 <p>Email: {{ usuario[2] }}</p>
                 <p>Senha: *********</p>
@@ -126,17 +135,17 @@
                 <div class="modal-content">
                     <div class="content editor-container">
                         <h1>Editar Informações</h1>
-                        <form id="edit-form">
+                        <form id="edit-form" action="/perfil/atualizar" method="POST">
                             <label for="novoNome">Nome:</label>
                             <input type="text" id="novoNome" name="novoNome" value="{{ usuario[1] }}"required>
                             <label for="novoEmail">Email:</label>
                             <input type="text" id="novoEmail" name="novoEmail" value="{{ usuario[2] }}"required>
                             <label for="novoCurso">Curso:</label>
-                            <input type="text" id="curso" name="novoCurso" value="{{ usuario[4] }}"required>
+                            <input type="text" id="novoCurso" name="novoCurso" value="{{ usuario[4] }}"required>
                             <label for="novoSemestre">Semestre:</label>
-                            <input type="text" id="semestre" name="novoSemestre" value="{{ usuario[5] }}" required>
+                            <input type="text" id="novoSemestre" name="novoSemestre" value="{{ usuario[5] }}" required>
                             <!-- Adicione mais campos de edição conforme necessário -->
-                            <button type="button" onclick="salvarEdicao()">Salvar</button>
+                            <button type="submit">Salvar</button>
                             <button type="button" onclick="fecharEditor()">Cancelar</button>
                         </form>
                     </div>
@@ -145,7 +154,7 @@
             <div class="modal" id="alterarSenhaModal">
                 <div class="modal-content">
                     <h2>Alterar Senha</h2>
-                    <form id="alterar-senha-form">
+                    <form id="alterar-senha-form" action="/perfil/atualizarsenha" method="POST">
                         <label for="senha_atual">Senha Atual</label>
                         <input type="password" id="senha_atual" name="senha_atual" required>
             
@@ -155,8 +164,8 @@
                         <label for="confirmar_senha">Confirmar Nova Senha</label>
                         <input type="password" id="confirmar_senha" name="confirmar_senha" required>
             
-                        <button type="button" onclick="enviarAlteracaoSenha()">Alterar Senha</button>
-                        <button type="button" onclick="fecharAlterarSenha()">Cancelar</button>
+                        <button type="submit" onclick="enviarAlteracaoSenha()">Alterar Senha</button>
+                        <button type="button" onclick="fecharAlterarSenha()">Fechar</button>
                     </form>
                 </div>
             </div>

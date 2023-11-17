@@ -6,19 +6,41 @@
     <link rel="stylesheet" type="text/css" href="../static/config/styles.css">
     <title>Adicionar Disciplina</title>
     <style>
-        /* Adicione estilos personalizados conforme necessário */
+        .radio-container {
+            display: flex;
+            align-items: left;
+            align-items: flex-start; /* Correção aqui */
+            flex-direction: row; /* Correção aqui */
+            flex-wrap: nowrap; /* Adicionado para garantir que não haja quebra de linha */
+        }
+
+        .radio-label {
+            margin-left: 2px; /* Espaçamento entre o radio e o label */
+        }
+
+        .custom-radio {
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            align-items: left;
+            align-items: flex-start; /* Correção aqui */
+        }
+
+        .custom-radio input {
+            margin-right: 5px; /* Espaçamento entre o radio e o label */
+        }
     </style>
 </head>
 <body>
     <header>
         <div class="perfil">
             <a href="/perfil">
-                <img src="../static/imagem/{{ nome }}.jpg" alt="Foto de Perfil">
-        <div>   
-            <h1>{{ nome }}</h1> 
-            <h2>Curso: {{ curso}}</h2>
-        </div>
-        </a>
+                <img src="../static/imagem/foto_perfil.webp" alt="Foto de Perfil">
+                <div>
+                    <h1>{{ nome }}</h1>
+                    <h2>Curso: {{ curso}}</h2>
+                </div>
+            </a>
         </div>
         <nav>
             <ul>
@@ -32,28 +54,55 @@
     </header>
     <div class="content">
         <h1>Adicionar Disciplina</h1>
-        <form action="/adicionar_disciplina" method="post">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flashes">
+            {% for message in messages %}
+                <div class="{{ category}}">{{ message}}</div>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+        <form action="/disciplina/adicionar" method="post">
             <label for="nome">Nome da Disciplina:</label>
             <input type="text" id="nome" name="nome" required>
-            
-            <label for="codigo">Código da Disciplina:</label>
+
+            <label for="codigo">Código da Disciplina (3 caracteres):</label>
             <input type="text" id="codigo" name="codigo" required>
-            
+            <small>Deve conter exatamente 3 caracteres para sigla e melhorar processo de busca.</small>
+
             <label for="professor">Professor:</label>
             <input id="professor" name="professor" required></textarea>
             <div>
                 <h3>Selecione os dias e horário para suas disciplinas:</h3>
                 <label for="dia">Dia da Semana:</label>
                 <select id="dia" name="dia">
-                  <option value="segunda">Segunda-feira</option>
-                  <option value="terca">Terça-feira</option>
-                  <!-- Adicione as opções para os outros dias da semana -->
+                  <option value="Segunda-feira">Segunda-feira</option>
+                  <option value="Terça-feira">Terça-feira</option>
+                  <option value="Quarta-feira">Quarta-feira</option>
+                  <option value="Quinta-feira">Quinta-feira</option>
+                  <option value="Sexta-feira">Sexta-feira</option>
+                  <option value="Sabado">Sábado</option>
                 </select>
                 <br>
                 <label for="horario">Horário:</label>
                 <input type="time" id="horario" name="horario">
+                </br>
+                <p> Quantidade por dia:</p>
+                <div class="radio-container">
+                    <label class="custom-radio">
+                        <input type="radio" name="opcao" value="2" required>
+                        <span class="radio-label">1h40min.</span>
+                    </label>
+                </div>
+
+                <div class="radio-container">
+                    <label class="custom-radio">
+                        <input type="radio" name="opcao" value="4">
+                        <span class="radio-label">3h20min.</span>
+                    </label>
+                </div>
             </div>
-              
             <button type="submit">Adicionar Disciplina</button>
         </form>
     </div>
