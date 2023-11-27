@@ -11,14 +11,7 @@ import sqlite3
 #APP FLASK
 
 app = Flask(__name__, static_url_path='/static')
-
-try:
-    with open('https://github.com/iopebiel/SistemaAcademico/blob/meu-novo-branch/static/config/secretkey.txt', 'r') as arquivo:
-        app.secret_key = arquivo.readline().strip() #Chave para sessão.
-except FileNotFoundError:
-    print("Arquivo não encontrado.")
-except Exception as e:
-    print(f"Ocorreu um erro: {e}")
+app.secret_key = "chave_secreta"
 
 email_contato = 'contato.sistemagu@gmail.com'
 
@@ -97,7 +90,7 @@ def enviar_email(destinatario, assunto, corpo):
     smtp_port = 587
     smtp_username = email_contato
     
-    arquivoemail = 'https://github.com/iopebiel/SistemaAcademico/blob/meu-novo-branch/static/config/senha.txt'
+    arquivoemail = '/home/gabriel/Documentos/SistemaAcademico/static/config/senha.txt'
         
     try:
         with open(arquivoemail, 'r') as arquivo:
