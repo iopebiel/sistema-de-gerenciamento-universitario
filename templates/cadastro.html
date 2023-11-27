@@ -61,8 +61,8 @@
             <input type="text" id="unidade" name="unidade" pattern="[A-Z]{2}" required>
             <small>Deve conter exatamente 2 caracteres maiúsculos.</small>
 
-            <label for="numeroprontuario">Número de Prontuário (7 dígitos):</label>
-            <input type="text" id="numeroprontuario" name="numeroprontuario" pattern="\d{7}" required>
+            <label for="numeroprontuario">Número de Prontuário (7 caracteres):</label>
+            <input type="text" id="numeroprontuario" name="numeroprontuario" minlength="7" maxlength="7" required>
             <small>Deve conter exatamente 7 dígitos.</small>
 
             <button type="submit">Cadastrar</button>

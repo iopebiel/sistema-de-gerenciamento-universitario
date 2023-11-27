@@ -71,7 +71,7 @@
     <div class="content">
     <button id="toggleTab">Mensagens</button><div id="tab" class="hidden">
         <h2>Guia de mensagens</h2>
-        <p>Esta é uma guia de exemplo.</p>
+        <p>Esta é uma guia de exemplo. Logo será disponibilizado.</p>
     </div>
     <script src="../static/config/script.js"></script>
     <div class="welcome-message">
@@ -91,7 +91,7 @@
                 <tr>
                     <td>{{ disciplina[3] }}</td>
                     <td>{{ disciplina[4] }} - {{disciplina[5]}} aulas</td>
-                    <td>{{ disciplina[1] }}</td>
+                    <td><a class="detalhes-link" href="#" >{{ disciplina[1] }}</a></td>
                 </tr>
             {% endfor %}
         </table>
