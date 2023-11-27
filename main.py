@@ -6,19 +6,14 @@ import smtplib
 from email.mime.text import MIMEText
 import re
 import sqlite3
+import requests
 
 
 #APP FLASK
 
 app = Flask(__name__, static_url_path='/static')
 
-try:
-    with open('https://github.com/iopebiel/SistemaAcademico/blob/meu-novo-branch/static/config/secretkey.txt', 'r') as arquivo:
-        app.secret_key = arquivo.readline().strip() #Chave para sessão.
-except FileNotFoundError:
-    print("Arquivo não encontrado.")
-except Exception as e:
-    print(f"Ocorreu um erro: {e}")
+app.secret_key = "chave_secreta" #Chave para sessão.
 
 email_contato = 'contato.sistemagu@gmail.com'
 
@@ -97,15 +92,15 @@ def enviar_email(destinatario, assunto, corpo):
     smtp_port = 587
     smtp_username = email_contato
     
-    arquivoemail = 'https://github.com/iopebiel/SistemaAcademico/blob/meu-novo-branch/static/config/senha.txt'
-        
+    github_url = 'https://raw.githubusercontent.com/iopebiel/SistemaAcademico/meu-novo-branch/static/config/senha.txt'
+
     try:
-        with open(arquivoemail, 'r') as arquivo:
-            smtp_password = arquivo.readline().strip()
-    except FileNotFoundError:
-        print("Arquivo não encontrado.")
-    except Exception as e:
-        print(f"Ocorreu um erro: {e}")
+        response = requests.get(github_url)
+        response.raise_for_status()  # Lança uma exceção se a solicitação não for bem-sucedida
+
+        smtp_password = response.text.strip()
+    except requests.RequestException as e:
+        print(f"Ocorreu um erro ao acessar o arquivo no GitHub: {e}")
 
     # Criação da mensagem de e-mail
     msg = MIMEText(corpo)
