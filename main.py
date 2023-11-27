@@ -99,6 +99,7 @@ def enviar_email(destinatario, assunto, corpo):
         response.raise_for_status()  # Lança uma exceção se a solicitação não for bem-sucedida
 
         smtp_password = response.text.strip()
+    
     except requests.RequestException as e:
         print(f"Ocorreu um erro ao acessar o arquivo no GitHub: {e}")
 
