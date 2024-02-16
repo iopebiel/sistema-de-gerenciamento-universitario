@@ -5,20 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
-    <link rel="stylesheet" type="text/css" href="../static/config/styles.css">
+    <link rel="stylesheet" type="text/css" href="../static/config/styles/reset.css">            
+    <link rel="stylesheet" type="text/css" href="../static/config/styles/login-subscribe.css">            
 </head>
-<style>
-    body {
-            display: flex;
-            justify-content: center; /* Centralize horizontalmente */
-            align-items: center; /* Centralize verticalmente */
-            min-height: 100vh; /* Ajusta a altura para a altura da viewport */
-     }
-</style>
+
 <body>
     <!-- Conteúdo do formulário de cadastro -->
     <div class="form-container">
-        <h1>Cadastre-se na SGU</h1>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
             <ul class="flashes">
@@ -29,7 +22,10 @@
         {% endif %}
         {% endwith %}
         
-        <form method="POST" action="/cadastro" class="form-group">
+        <h1>Cadastre-se na SGU</h1>
+
+        <form method="POST" action="/subscribe" class="form-group">
+            <div class="input-container">
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" required>
             
@@ -64,11 +60,13 @@
             <label for="numeroprontuario">Número de Prontuário (7 caracteres):</label>
             <input type="text" id="numeroprontuario" name="numeroprontuario" minlength="7" maxlength="7" required>
             <small>Deve conter exatamente 7 dígitos.</small>
-
+            </div>
             <button type="submit">Cadastrar</button>
-            </form>
+        </form>
+
         <div class="links">
            <p>Já tem uma conta? <a href="/login">Faça login aqui</a></p>
         </div>
+
 </body>
 </html>

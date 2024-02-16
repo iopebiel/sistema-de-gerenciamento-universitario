@@ -5,24 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="../static/config/styles.css">            
+    <link rel="stylesheet" type="text/css" href="../static/config/styles/reset.css">
+    <link rel="stylesheet" type="text/css" href="../static/config/styles/login-subscribe.css">            
 </head>
-<style>
-    body {
-            display: flex;
-            justify-content: center; /* Centralize horizontalmente */
-            align-items: center; /* Centralize verticalmente */
-            height: 100vh; /* Ajusta a altura para a altura da viewport */
-     }
-</style>
+
 <body>
-    <!-- Conteúdo do formulário de login -->
     <div class="form-container">
         {% with messages = get_flashed_messages() %}
         {% if messages %}
             <ul class="flashes">
             {% for message in messages %}
-                <div class="{{ ctaegory}}">{{ message}}</div>
+                <div class="{{ category}}">{{ message}}</div>
             {% endfor %}
             </ul>
         {% endif %}
@@ -40,7 +33,7 @@
         <button type="submit">Entrar</button>
     </form>
     <div class="links">
-        <p></p> Ainda não tem uma conta? <a href="/cadastro">Cadastre-se</a></p>
+        <p> Ainda não tem uma conta? <a href="/cadastro">Cadastre-se</a></p>
         <p>Não consegue acessar sua conta? <a href="/redefinirsenha">Redefinir senha</a></p>
     </div>
 </body>

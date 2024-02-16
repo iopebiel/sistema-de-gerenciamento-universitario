@@ -119,7 +119,7 @@ def enviar_email(destinatario, assunto, corpo):
  
 #-----PRIMEIRAS TELAS-----
  
-@app.route('/cadastro', methods=['GET','POST'])
+@app.route('/subscribe', methods=['GET','POST'])
 def cadastrar():
     if request.method == 'POST':
         email = request.form['email']
@@ -135,7 +135,7 @@ def cadastrar():
 
         #Deve conter exatamente 7 caracteres
         if not re.match(r'^.{7}$', numeroprontuario):
-            flash ("Número de prontuário inválido. Deve conter exatamente 7 caracteres.", "danger")
+            flash ("Número de prontuário inválido. Deve conter exatamente 7 caracteres.", "alert")
             
         senha_hash = generate_password_hash(senha, method='sha256')
         
@@ -146,7 +146,7 @@ def cadastrar():
             usuario_existente = cursor.fetchone()
             if usuario_existente:
                 flash("Erro durante o cadastro: Este email já está cadastrado.", "danger")
-                return render_template('cadastro.html')
+                return render_template('subscribe.html')
 
             senha_hash = generate_password_hash(senha, method='sha256')
             cursor.execute('''
@@ -154,19 +154,16 @@ def cadastrar():
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
                     ''', (nome, email, senha_hash, curso, turma, semestre, unidade, numeroprontuario))
             conexao.commit()        
-            enviar_email(email, 'Cadastro realizado com sucesso!', f'''Olá {nome}!
-Seu cadastro foi realizado com sucesso!
-Seja bem vindo ao Sistema de Gerenciamento Universitário.
-''')
+            enviar_email(email, 'Cadastro realizado com sucesso!', f'Olá {nome}!', 'Seu cadastro foi realizado com sucesso!', 'Seja bem vindo ao Sistema de Gerenciamento Universitário.')
     
             flash("Cadastro realizado com sucesso!", "success")
         except Exception as e:
-                flash(f"Erro durante o cadastro: Número de Prontuário já existe.")
+                flash(f"Erro durante o cadastro: Número de Prontuário já existe.", "danger")
         finally:
                 conexao.close()
 
     # Método GET
-    return render_template('cadastro.html')
+    return render_template('subscribe.html')
     
 
 
