@@ -3,43 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../static/config/styles.css">
+    <link rel="stylesheet" href="../static/config/styles/reset.css">
+    <link rel="stylesheet" href="../static/config/styles/body-header.css">
+    <link rel="stylesheet" href="../static/config/styles/home.css">
+
     <title>Adicionar Disciplina</title>
     <style>
-        .small {
-            top: 2px; /* Espaçamento entre o radio e o label */
-        }
-
-        .radio-container {
-            display: flex;
-            align-items: left;
-            align-items: flex-start; /* Correção aqui */
-            flex-direction: row; /* Correção aqui */
-            flex-wrap: nowrap; /* Adicionado para garantir que não haja quebra de linha */
-        }
-
-        .radio-label {
-            margin-left: 2px; /* Espaçamento entre o radio e o label */
-        }
-
-        .custom-radio {
-            cursor: pointer;
-            user-select: none;
-            display: flex;
-            align-items: left;
-            align-items: flex-start; /* Correção aqui */
-            margin-right: 5px; /* Espaçamento entre o radio e o label */
-        }
-
-        .custom-radio input {
-            margin-right: 5px; /* Espaçamento entre o radio e o label */
-        }
+        
     </style>
 </head>
 <body>
     <header>
         <div class="perfil">
-            <a href="/perfil">
+            <a href="/profile">
                 <img src="../static/imagem/foto_perfil.webp" alt="Foto de Perfil">
                 <div>
                     <h1>{{ nome }}</h1>
@@ -49,10 +25,10 @@
         </div>
         <nav>
             <ul>
-                <li><a href="/inicio">Início</a></li>
-                <li><a href="/mensagens">Mensagens</a></li>
-                <li><a href="/relatorio">Relatório</a></li>
-                <li><a href="/disciplina">Disciplinas</a></li>
+                <li><a href="/home">Início</a></li>
+                <li><a href="/messages">Mensagens</a></li>
+                <li><a href="/insights">Relatório</a></li>
+                <li><a href="/subject">Disciplinas</a></li>
                 <li><a href="/logout">Sair</a></li>
             </ul>
         </nav>
@@ -68,7 +44,7 @@
             </ul>
         {% endif %}
         {% endwith %}
-        <form action="/disciplina/adicionar" method="post">
+        <form action="/subject/add" method="post">
             <label for="nome">Nome da Disciplina:</label>
             <input type="text" id="nome" name="nome" required>
 

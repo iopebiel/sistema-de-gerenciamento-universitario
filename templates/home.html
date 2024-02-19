@@ -4,54 +4,15 @@
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Início</title>
-    <link rel="stylesheet" type="text/css" href="../static/config/styles.css">
- <!--   <style>
+    <link rel="stylesheet" type="text/css" href="../static/config/styles/reset.css">
+    <link rel="stylesheet" type="text/css" href="../static/config/styles/body-header.css">
+    <link rel="stylesheet" type="text/css" href="../static/config/styles/home.css">
 
-        /* Estilo para o widget de horário de aula */
-        .widget {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            width: 80%;
-            margin: 0 auto;
-        }
-        .table-container {
-                    overflow-x: auto; /* Torna a tabela rolável horizontalmente */
-         }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            overflow-x: auto; /* Torna a tabela rolável horizontalmente */
-        }
-
-        th, td {
-            padding: 8px 12px;
-            text-align: left;
-            border-bottom: 1px solid #ccc;
-        }
-
-        th {
-            background-color: #f0f0f0;
-        }
-        @media screen and (max-width: 600px) {
-            /* Estilo para telas menores (menos de 600px de largura) */
-            table {
-                font-size: 14px; /* Reduz o tamanho da fonte */
-            }
-        }
-        .hidden {
-        display: none;
-        }
-
-    </style>-->
 </head>
 <body>
         <header>
             <div class="perfil">
-                <a href="/perfil">
+                <a href="/profile">
             <img src="../static/imagem/foto_perfil.webp" alt="Foto de Perfil">
             <div>    
                 <h1>{{ nome }}</h1> 
@@ -61,9 +22,9 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="/inicio">Início</a></li>
-                    <li><a href="/relatorio">Relatório</a></li>
-                    <li><a href="/disciplina">Disciplinas</a></li>
+                    <li><a href="/home">Início</a></li>
+                    <li><a href="/insights">Relatório</a></li>
+                    <li><a href="/subject">Disciplinas</a></li>
                     <li><a href="/logout">Sair</a></li>
                 </ul>
             </nav>
@@ -71,9 +32,10 @@
     <div class="content">
     <button id="toggleTab">Mensagens</button><div id="tab" class="hidden">
         <h2>Guia de mensagens</h2>
-        <p>Esta é uma guia de exemplo. Logo será disponibilizado.</p>
+        {% if not message %}
+            <p>Não há recados e notificações.</p>
+        {% endif %}
     </div>
-    <script src="../static/config/script.js"></script>
     <div class="welcome-message">
         <h1>Bem-vindo à Página de Início</h1>
         <p>Esta é a nossa página de início. Sinta-se à vontade para explorar!</p>
@@ -91,11 +53,13 @@
                 <tr>
                     <td>{{ disciplina[3] }}</td>
                     <td>{{ disciplina[4] }} - {{disciplina[5]}} aulas</td>
-                    <td><a class="detalhes-link" href="/disciplina" >{{ disciplina[1] }}</a></td>
+                    <td><a class="detalhes-link" href="/subject" >{{ disciplina[1] }}</a></td>
                 </tr>
             {% endfor %}
         </table>
-    <p>Logo os horários de suas aulas estarão disponíveis por aqui.</p>
+    {% if not disciplina %}
+        <p>Logo os horários de suas aulas estarão disponíveis por aqui.</p>
+    {% endif %}
     </div>
     <div class="section">
         <h2>Minha agenda</h2>
@@ -119,4 +83,5 @@
         </div>
     </div>
 </body>
+<script src="../static/config/scripts/home.js"></script>
 </html>

@@ -181,7 +181,7 @@ def login():
 
         if senha_hash and check_password_hash(senha_hash[0], senha): #(Senha correta)
             session['usuario'] = email
-            return redirect ('/inicio')
+            return redirect ('/home')
         else:
                 flash("Credenciais inválidas. Tente novamente.", "danger")
 
@@ -211,8 +211,8 @@ def verificarcodigo():
         return render_template('redefinir_senha.html', etapa='etapa3-form')    
     return render_template('redefinir_senha.html', etapa='etapa2-form')
    
-@app.route('/redefinirsenha', methods=['GET','POST'])
-def redefinirsenha():
+@app.route('/change_password', methods=['GET','POST'])
+def change_password():
     if request.method == 'POST':
         nova_senha = request.form['nova-senha']
         confirmar_senha = request.form['confirmar-senha']
@@ -230,8 +230,8 @@ def redefinirsenha():
 
 #-----LOGADO-----
 
-@app.route('/inicio')
-def inicio():
+@app.route('/home')
+def home():
     email = session.get('usuario')  
     if email:
         conexao = sqlite3.connect('usuarios.db')
@@ -241,7 +241,7 @@ def inicio():
         horarios = obter_disciplinas_do_banco_de_dados(email)
         conexao.close()
         nome_usuario, curso_usuario = usuario_info
-        return render_template('inicio.html', nome=nome_usuario, curso=curso_usuario, email=email, horarios=horarios)
+        return render_template('home.html', nome=nome_usuario, curso=curso_usuario, email=email, horarios=horarios)
     else:
         #Usuário não logado
         return redirect('/login')
@@ -250,8 +250,8 @@ def inicio():
 #-----PERFIL-----
 
 
-@app.route('/perfil')
-def perfil():
+@app.route('/profile')
+def profile():
     email_usuario = session.get('usuario')  
     if email_usuario:
         conexao = sqlite3.connect('usuarios.db')
@@ -259,13 +259,13 @@ def perfil():
         cursor.execute('SELECT * FROM alunos WHERE email = ?', (email_usuario,))
         dados_usuario = cursor.fetchone()
         conexao.close()
-        return render_template('perfil.html', usuario=dados_usuario)
+        return render_template('profile.html', usuario=dados_usuario)
     else:
         #Usuário não logado
         return redirect('/login')
 
-@app.route('/perfil/atualizar', methods=['POST'])
-def atualizar_perfil():
+@app.route('/profile/update', methods=['POST'])
+def update_profile():
     email_usuario = session.get('usuario')
     if email_usuario:
         novo_nome = request.form.get('novoNome')
@@ -281,13 +281,13 @@ def atualizar_perfil():
         conexao.close()
 
         flash('Perfil atualizado com sucesso!', 'success')
-        return redirect(url_for('perfil'))
+        return redirect(url_for('profile'))
     else:
         #usuario não logado
         return redirect('/login')
 
-@app.route('/perfil/atualizarsenha', methods=['POST'])
-def alterar_senha():
+@app.route('/profile/updatepassword', methods=['POST'])
+def update_password():
     if request.method == 'POST':
         senha_atual = request.form['senha_atual']
         nova_senha = request.form['nova_senha']
@@ -299,7 +299,7 @@ def alterar_senha():
                 nova_senha_hash = generate_password_hash(nova_senha, method='sha256')
                 atualizar_senha_no_banco_de_dados(email_usuario, nova_senha_hash)
                 flash("Senha alterada com sucesso.", "success")
-                return redirect('/perfil')  
+                return redirect('/profile')  
             else:
                 flash("Senha atual incorreta. Tente novamente.", "danger")
         
@@ -368,8 +368,8 @@ def obter_disciplinas_do_banco_de_dados(email_aluno):
 
     return dados_disciplinas
 
-@app.route('/disciplina')
-def disciplina():
+@app.route('/subject')
+def subject():
     email = session.get('usuario')
     if email:
         conexao = sqlite3.connect('usuarios.db')
@@ -378,7 +378,7 @@ def disciplina():
         usuario_info = cursor.fetchone()
         nome_usuario, curso_usuario = usuario_info
         disciplinas = obter_disciplinas_do_banco_de_dados(email)
-        return render_template('disciplina.html',  nome=nome_usuario, curso=curso_usuario, email=email, disciplinas=disciplinas)
+        return render_template('subject.html',  nome=nome_usuario, curso=curso_usuario, email=email, disciplinas=disciplinas)
         
 
 def verificar_registro_aluno_disciplina(email_aluno, codigo_disciplina):
@@ -408,11 +408,11 @@ def registrar_aluno_disciplina(email_aluno, codigo_disciplina):
     conexao.commit()
     conexao.close()
     flash('Disciplina adicionada com sucesso.', 'success')
-    return redirect('/disciplina')
+    return redirect('/subject')
 
 
-@app.route('/disciplina/adicionar', methods=['GET', 'POST'])
-def adicionar_disciplina():
+@app.route('/subject/add', methods=['GET', 'POST'])
+def subject_add():
     if 'usuario' not in session:
         return redirect('/login')
 
@@ -449,13 +449,13 @@ def adicionar_disciplina():
     cursor.execute('SELECT nome, curso FROM alunos WHERE email = ?', (email_usuario,))
     usuario_info = cursor.fetchone()
     nome_usuario, curso_usuario = usuario_info
-    return render_template('adicionar_disciplina.html', email = email_usuario, nome = nome_usuario, curso = curso_usuario)  # Renderize a página de adição de disciplina
+    return render_template('subject_add.html', email = email_usuario, nome = nome_usuario, curso = curso_usuario)  # Renderize a página de adição de disciplina
 
 
 #-----PÁGINAS FUTURAS-----
 
-@app.route('/relatorio')
-def relatorio():
+@app.route('/insights')
+def insights():
     email_usuario = session.get('usuario')  
     if email_usuario:
         conexao = sqlite3.connect('usuarios.db')
@@ -463,14 +463,14 @@ def relatorio():
         cursor.execute('SELECT nome, curso FROM alunos WHERE email = ?', (email_usuario,))
         usuario_info = cursor.fetchone()
         nome_usuario, curso_usuario = usuario_info
-        return render_template('relatorio.html', email = email_usuario, nome = nome_usuario, curso = curso_usuario)
+        return render_template('insights.html', email = email_usuario, nome = nome_usuario, curso = curso_usuario)
     
     else:
         #Usuário não logado.
         return redirect('/login')
 
-@app.route('/mensagens')
-def mensagens():
+@app.route('/messages')
+def messages():
     email_usuario = session.get('usuario')
     if email_usuario:
         conexao = sqlite3.connect('usuarios.db')
@@ -478,7 +478,7 @@ def mensagens():
         cursor.execute('SELECT nome, curso FROM alunos WHERE email = ?', (email_usuario,))
         usuario_info = cursor.fetchone()
         nome_usuario, curso_usuario = usuario_info
-        return render_template('mensagens.html', email = email_usuario, nome = nome_usuario, curso = curso_usuario)
+        return render_template('messages.html', email = email_usuario, nome = nome_usuario, curso = curso_usuario)
     
     else:
         #Usuário não logado.
