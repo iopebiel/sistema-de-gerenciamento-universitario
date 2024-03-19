@@ -7,24 +7,24 @@
     <title>Cadastro</title>
     <link rel="stylesheet" type="text/css" href="../static/config/styles/reset.css">            
     <link rel="stylesheet" type="text/css" href="../static/config/styles/body-header.css">
-    <link rel="stylesheet" type="text/css" href="../static/config/styles/login-subscribe.css">            
+    <link rel="stylesheet" type="text/css" href="../static/config/styles/login-subscribe.css"> 
 </head>
 
 <body>
-    <!-- Conteúdo do formulário de cadastro -->
+
     <div class="form-container">
+
         {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul class="flashes">
-            {% for message in messages %}
-                <div class="{{ category}}">{{ message}}</div>
-            {% endfor %}
-            </ul>
-        {% endif %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for message in messages %}
+                        <div class="{{ category}}">{{ message}}</div>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         {% endwith %}
         
         <h1>Cadastre-se na SGU</h1>
-
         <form method="POST" action="/subscribe" class="form-group">
             <div class="input-container">
             <label for="nome">Nome:</label>
@@ -68,6 +68,8 @@
         <div class="links">
            <p>Já tem uma conta? <a href="/login">Faça login aqui</a></p>
         </div>
+
+    </div>
 
 </body>
 </html>

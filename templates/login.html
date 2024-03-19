@@ -6,35 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="../static/config/styles/reset.css">
+    <link rel="stylesheet" type="text/css" href="../static/config/styles/body-header.css">
     <link rel="stylesheet" type="text/css" href="../static/config/styles/login-subscribe.css">            
 </head>
 
 <body>
+
     <div class="form-container">
+
         {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul class="flashes">
-            {% for message in messages %}
-                <div class="{{ category}}">{{ message}}</div>
-            {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-    <h1>SGU</h1>
-    <form method="POST" action="/login" class="form-group">
-        <div class="input-container">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            {% if messages %}
+                <ul class="flashes">
+                    {% for message in messages %}
+                        <div class="{{ category}}">{{ message}}</div>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
         
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" required>
+        <h1>SGU</h1>
+        <form method="POST" action="/login" class="form-group">
+            <div class="input-container">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" required>
+            </div>
+            <button type="submit">Entrar</button>    
+        </form>
+
+        <div class="link">
+            <p> Ainda não tem uma conta? <a href="/cadastro">Cadastre-se</a></p>
+            <p>Não consegue acessar sua conta? <a href="/changepassword">Redefinir senha</a></p>
         </div>
 
-        <button type="submit">Entrar</button>
-    </form>
-    <div class="links">
-        <p> Ainda não tem uma conta? <a href="/cadastro">Cadastre-se</a></p>
-        <p>Não consegue acessar sua conta? <a href="/redefinirsenha">Redefinir senha</a></p>
     </div>
+    
 </body>
 </html>

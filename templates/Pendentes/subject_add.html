@@ -8,67 +8,83 @@
     <link rel="stylesheet" href="../static/config/styles/home.css">
 
     <title>Adicionar Disciplina</title>
-    <style>
-        
-    </style>
+
 </head>
 <body>
     <header>
+
         <div class="perfil">
+
             <a href="/profile">
                 <img src="../static/imagem/foto_perfil.webp" alt="Foto de Perfil">
-                <div>
-                    <h1>{{ nome }}</h1>
-                    <h2>Curso: {{ curso}}</h2>
-                </div>
+                <div class="perfil_info">    
+                    <h1>{{ nome }}</h1> 
+                    <h2>Curso: {{ curso}}</h2>    
+                </div>    
             </a>
+
         </div>
+
         <nav>
+
             <ul>
                 <li><a href="/home">Início</a></li>
                 <li><a href="/messages">Mensagens</a></li>
-                <li><a href="/insights">Relatório</a></li>
                 <li><a href="/subject">Disciplinas</a></li>
                 <li><a href="/logout">Sair</a></li>
             </ul>
+
         </nav>
+    
     </header>
+
+
     <div class="content">
+
         <h1>Adicionar Disciplina</h1>
         {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul class="flashes">
-            {% for message in messages %}
-                <div class="{{ category}}">{{ message}}</div>
-            {% endfor %}
-            </ul>
-        {% endif %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for message in messages %}
+                        <div class="{{ category}}">{{ message}}</div>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         {% endwith %}
+
         <form action="/subject/add" method="post">
-            <label for="nome">Nome da Disciplina:</label>
-            <input type="text" id="nome" name="nome" required>
+            <div class="">
+                <h3>Informações Gerais da disciplina:</h3>
 
-            <label for="codigo">Código da Disciplina (3 caracteres):</label>
-            <input type="text" id="codigo" name="codigo" required>
-            <small>Deve conter exatamente 3 caracteres para sigla e melhorar processo de busca.</small>
+                <label for="nome">Nome da Disciplina:</label>
+                <input type="text" id="nome" name="nome" required>
+    
+                <label for="codigo">Código da Disciplina (3 caracteres):</label>
+                <input type="text" id="codigo" name="codigo" required>
+                <small>Deve conter exatamente 3 caracteres para sigla e melhorar processo de busca.</small>
+    
+                <label for="professor">Professor:</label>
+                <input id="professor" name="professor" required></textarea>
+    
+            </div>
 
-            <label for="professor">Professor:</label>
-            <input id="professor" name="professor" required></textarea>
-            <div>
-                <h3>Selecione os dias e horário para suas disciplinas:</h3>
+            <div class="">
+
+                <h3>Selecione os dias e horário para sua disciplina:</h3>
+
                 <label for="dia">Dia da Semana:</label>
                 <select id="dia" name="dia">
-                  <option value="Segunda-feira">Segunda-feira</option>
-                  <option value="Terça-feira">Terça-feira</option>
-                  <option value="Quarta-feira">Quarta-feira</option>
-                  <option value="Quinta-feira">Quinta-feira</option>
-                  <option value="Sexta-feira">Sexta-feira</option>
-                  <option value="Sabado">Sábado</option>
+                    <option value="Segunda-feira">Segunda-feira</option>
+                    <option value="Terça-feira">Terça-feira</option>
+                    <option value="Quarta-feira">Quarta-feira</option>
+                    <option value="Quinta-feira">Quinta-feira</option>
+                    <option value="Sexta-feira">Sexta-feira</option>
+                    <option value="Sabado">Sábado</option>
                 </select>
-                <br>
+
                 <label for="horario">Horário:</label>
                 <input type="time" id="horario" name="horario">
-                </br>
+
                 <p> Quantidade por dia:</p>
                 <div class="radio-container">
                     <label class="custom-radio">
@@ -83,9 +99,14 @@
                         <span class="radio-label">3h20min.</span>
                     </label>
                 </div>
+
+                <button type="submit">Adicionar Disciplina</button>
+
             </div>
-            <button type="submit">Adicionar Disciplina</button>
+
         </form>
+
     </div>
+
 </body>
 </html>

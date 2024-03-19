@@ -201,18 +201,18 @@ def codigo_email():
 Seu código de verificação é: {codigo_verificacao}
 Acesse a página de verificação, insira seu código e redefina sua senha.
 ''')
-    return render_template('redefinir_senha.html', codigo = codigo_verificacao, etapa='etapa2-form')
+    return render_template('change_password.html', codigo = codigo_verificacao, etapa='etapa2-form')
 
 @app.route('/verificarcodigo', methods=['POST'])    
 def verificarcodigo():
     codigoenviado = session.get('codigo')
     codigodigitado = request.form.get('codigo_usuario')
     if (codigoenviado == codigodigitado):
-        return render_template('redefinir_senha.html', etapa='etapa3-form')    
-    return render_template('redefinir_senha.html', etapa='etapa2-form')
+        return render_template('change_password.html', etapa='etapa3-form')    
+    return render_template('change_password.html', etapa='etapa2-form')
    
-@app.route('/change_password', methods=['GET','POST'])
-def change_password():
+@app.route('/changepassword', methods=['GET','POST'])
+def changepassword():
     if request.method == 'POST':
         nova_senha = request.form['nova-senha']
         confirmar_senha = request.form['confirmar-senha']
@@ -223,9 +223,9 @@ def change_password():
             flash("Senha alterada com sucesso.", "success")
             return redirect('/login')
         flash("As senhas não coincidem", "danger")
-        return render_template('redefinir_senha.html', etapa = 'etapa3-form')  
+        return render_template('change_password.html', etapa = 'etapa3-form')  
     
-    return render_template('redefinir_senha.html', etapa = 'etapa1-form')  
+    return render_template('change_password.html', etapa = 'etapa1-form')  
 
 
 #-----LOGADO-----

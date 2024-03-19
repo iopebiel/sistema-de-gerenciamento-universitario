@@ -9,29 +9,33 @@
     <link rel="stylesheet" type="text/css" href="../static/config/styles/home.css">
 
     <title>Meu perfil</title>
-
 </head>
+
 <body>
+    
     <header>
+
         <div class="perfil">
             <a href="/profile">
-            <img src="../static/imagem/foto_perfil.webp" alt="Foto de Perfil">
-        <div>    
-            <h1>{{usuario[1]}}</h1> 
-            <h2>Curso: {{usuario[4]}}</h2>
+                <img src="../static/imagem/foto_perfil.webp" alt="Foto de Perfil">
+                <div class="perfil_info">    
+                    <h1>{{ nome }}</h1> 
+                    <h2>Curso: {{ curso}}</h2>    
+                </div>    
+            </a>
         </div>
-        </a>
-        </div>
+
         <nav>
             <ul>
                 <li><a href="/home">Início</a></li>
-                <li><a href="#">Mensagens</a></li>
-                <li><a href="/insights">Relatório</a></li>
+                <li><a href="/messages">Mensagens</a></li>
                 <li><a href="/subject">Disciplinas</a></li>
                 <li><a href="/logout">Sair</a></li>
             </ul>
         </nav>
+    
     </header>
+
     <div class="content">
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <h1 style="flex: 80%; margin: 0; padding: 10px; background-color: #424141; color: #fff;">Meu perfil</h1>
@@ -104,6 +108,7 @@
                 </div>
             </div>
 
-    <script src="static/config/scripts/profile.js"></script>
 </body>
+
+<script src="static/config/scripts/profile.js"></script>
 </html>

@@ -1,3 +1,41 @@
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    background-color: #388dfd;
+}
+.form-container .flashes {
+    font-size: 18px;
+    align-self: center;
+    padding: 5px 0;
+}
+
+.form-container .flashes .danger {
+    color: #ff0000;
+}
+
+.form-container .flashes .alert {
+    color: #ffff00;
+}
+
+.form-container .flashes .success {
+    color: #00ff00;
+}
+
+label {
+    font-size: 16px;
+    margin: 12px 0 5px 1px;
+    font-weight: bold;
+}
+
+input, select {
+    padding: 10px;
+    font-size: 14px;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
 header {
     background-color: #333;
     color: #fff;
@@ -6,13 +44,6 @@ header {
     justify-content: space-between;
     align-items: center;
 }
-
-body {
-    font-family: Arial, sans-serif;
-    min-height: 100vh;
-    background-color: #388dfd;
-}
-
 
 .containerperfil {
     padding: 20px;
@@ -54,4 +85,12 @@ body {
     color: #ccc;
     font-style: inherit;
     text-decoration: none;
+}
+
+.hidden {
+    display: none;
+}
+
+button:hover {
+    background-color: #0056b3;
 }
