@@ -3,6 +3,7 @@
 Sistema de Gerenciamento Acadêmico é parte do projeto para entrega na disciplina de 'Projeto Interdisciplinar de Computação' no 4º Semestre de Ciência da Computação no Instituto Federal de São Paulo Campus Salto.
 
 Está em desenvolvimento, com algumas funções já podendo ser utilizadas pela versão publicada.
+Estarei ajeitando no período de 1 semana, quanto a estilização de cada template.
 
 ![Resultado do projeto](static/imagem/Previa.png)
 
