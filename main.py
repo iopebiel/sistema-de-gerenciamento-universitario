@@ -223,9 +223,9 @@ def changePassword():
             flash("Senha alterada com sucesso.", "success")
             return redirect('/login')
         flash("As senhas não coincidem", "danger")
-        return render_template('changePassword.html', etapa = 'etapa3-form')  
+        return render_template('changePassword.html', etapa='etapa3-form')  
     
-    return render_template('changePassword.html', etapa = 'etapa1-form')  
+    return render_template('changePassword.html', etapa='etapa1-form')  
 
 
 #-----LOGADO-----

@@ -8,7 +8,6 @@ function showStep(etapa) {
     document.getElementById(etapa).classList.remove('hidden');
 }
 
-
 showStep('{{ etapa }}');
 
 function checkCode() {
@@ -16,7 +15,7 @@ function checkCode() {
     var codigoGerado = '{{ codigo }}'; // Obtém o código gerado pelo servidor
     if (codigoInserido === codigoGerado) {
         // Código correto, redirecione o usuário para a próxima etapa
-        mostrarEtapa('etapa3-form');
+        showStep('etapa3-form');
     } else {
         // Código incorreto, exiba uma mensagem de erro (você pode usar alert, exibir uma mensagem na página, etc.)
         alert('Código incorreto. Tente novamente.');

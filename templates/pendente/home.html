@@ -2,13 +2,32 @@
 <html lang="pt-br">
 
 <meta charset="UTF-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Início</title>
+    
     <link rel="stylesheet" type="text/css" href="../../static/config/styles/reset.css">
     <link rel="stylesheet" type="text/css" href="../../static/config/styles/body-header.css">
     <link rel="stylesheet" type="text/css" href="../../static/config/styles/pendente/home.css">
 
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css" integrity="sha512-jQcpw1zDugORx3f2JtUxXbX/Si4ktq488bmUvGB8Tz9BtlsEYN9hkN7SuaKlHa+4ME95k+hLfrn0mbYCrY/g/w==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css" 
+    integrity="sha512-eBxzDWX6OiszkLv4+rzUiTP3FgBnDMJeDVkdN3PiCYjZZIUhdWu5aoBJEay8IiDSW+3womeUhVFRZ29c37S8tA==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/brands.min.css" 
+    integrity="sha512-ym1f+T15aiJGZ1y6zs1XEpr8qheyBcOPqjFYNf2UfRmfIt5Pdsp7SD5O74fmsFB+rxxO6ejRqiooutodoNSjRQ==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+
 </head>
+
 <body>
 
     <header>
@@ -25,77 +44,115 @@
 
         <nav>
             <ul>
-                <li><a href="/home">Início</a></li>
-                <li><a href="/messages">Mensagens</a></li>
-                <li><a href="/subject">Disciplinas</a></li>
-                <li><a href="/logout">Sair</a></li>
+                <li>
+                    <a href="/home">
+                        <span class="fa-solid fa-house"></span> 
+                        <span>Ínicio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/messages">
+                        <span class="fa-solid fa-bell"></span> 
+                        <span>Notificações</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/subject">
+                        <span class="fa-solid fa-book"></span> 
+                        <span>Minhas Disciplinas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/insights">
+                        <span class="fa-solid fa-file-lines"></span> 
+                        <span>Relatórios</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/logout">
+                        <span class="fa-solid fa-right-from-bracket"></span> 
+                        <span>Sair</span>
+                    </a>
+                </li>
             </ul>
         </nav>
     
     </header>
 
     <div class="content">
-        <button id="toggleTab">Mensagens</button><div id="tab" class="hidden">
-            <h2>Guia de mensagens</h2>
+        
+        <button id="toggleTab">Mensagens</button>
+        <div id="tab" class="hidden">
             {% if not message %}
-                <p>Não há recados e notificações.</p>
+                <p>Não há recados e notificações no momento.</p>
             {% endif %}
-    </div>
+        </div>
     
-    <div class="welcome-message">
-        <h1>Bem-vindo à Página de Início</h1>
-        <p>Esta é a nossa página de início. Sinta-se à vontade para explorar!</p>
-    </div>
+        <div class="welcome-message">
+            <h1>Bem-vindo à Página de Início</h1>
+            <p>Esta é a nossa página de início. Sinta-se à vontade para explorar!</p>
+        </div>
 
-    <div class="section">
-        <h2>Horário de Aula</h2>
+        <div class="section">
+            <h2>Horário de Aula</h2>
 
-        <table border="1">
-            <tr>
-                <th>Dia</th>
-                <th>Horário</th>
-                <th>Disciplina</th>
-            </tr>
-
-            {% for disciplina in horarios %}
+            <table border="1">
+                
                 <tr>
-                    <td>{{ disciplina[3] }}</td>
-                    <td>{{ disciplina[4] }} - {{disciplina[5]}} aulas</td>
-                    <td><a class="detalhes-link" href="/subject" >{{ disciplina[1] }}</a></td>
+                    <th>Dia</th>
+                    <th>Horário</th>
+                    <th>Disciplina</th>
                 </tr>
-            {% endfor %}
-        </table>
 
-        {% if not disciplina %}
-            <p>Logo os horários de suas aulas estarão disponíveis por aqui.</p>
-        {% endif %}
-    </div>
+                {% for disciplina in horarios %}
+                    <tr>
+                        <td>{{ disciplina[3] }}</td>
+                        <td>{{ disciplina[4] }} - {{disciplina[5]}} aulas</td>
+                        <td>
+                            <a class="detalhes-link" href="/subject" >{{ disciplina[1] }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
 
-    <div class="section">
-        <h2>Minha agenda</h2>
-        <p>Meus compromissos com prazo de entrega!</p>
+            </table>
 
-        <div class="section">
-            <h2>Lembretes</h2>
-            <ul>
-                <li>Lembrete 1</li>
-                <li>Lembrete 2</li>
-                <li>Lembrete 3</li>
-            </ul>
+            {% if not disciplina %}
+                <p>Logo os horários de suas aulas estarão disponíveis por aqui.</p>
+            {% endif %}
+            
         </div>
 
         <div class="section">
-            <h2>Tarefas e entregas</h2>
-            <ul>
-                <li>Tarefa 1</li>
-                <li>Tarefa 2</li>
-                <li>Tarefa 3</li>
-            </ul>
+            <h2>Minha agenda</h2>
+            <p>Meus compromissos com prazo de entrega!</p>
+
+            <div class="section">
+
+                <h2>Lembretes</h2>
+
+                {% if not lembretes %}
+                <p>Logo os horários de suas aulas estarão disponíveis por aqui.</p>
+                {% endif %}
+
+            </div>
+
+            <div class="section">
+
+                <h2>Tarefas e entregas</h2>
+
+                {% if not tarefas %}
+                <p>Logo os horários de suas aulas estarão disponíveis por aqui.</p>
+                {% endif %}
+
+            </div>
+
         </div>
+    
     </div>
 
 </body>
 
 
-<script src="../static/config/scripts/home.js"></script>
+<script src="../../static/config/scripts/home.js"></script>
+
 </html>

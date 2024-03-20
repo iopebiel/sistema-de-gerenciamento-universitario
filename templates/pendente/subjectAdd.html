@@ -10,12 +10,29 @@
 
     <title>Adicionar Disciplina</title>
 
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css" integrity="sha512-jQcpw1zDugORx3f2JtUxXbX/Si4ktq488bmUvGB8Tz9BtlsEYN9hkN7SuaKlHa+4ME95k+hLfrn0mbYCrY/g/w==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css" 
+    integrity="sha512-eBxzDWX6OiszkLv4+rzUiTP3FgBnDMJeDVkdN3PiCYjZZIUhdWu5aoBJEay8IiDSW+3womeUhVFRZ29c37S8tA==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/brands.min.css" 
+    integrity="sha512-ym1f+T15aiJGZ1y6zs1XEpr8qheyBcOPqjFYNf2UfRmfIt5Pdsp7SD5O74fmsFB+rxxO6ejRqiooutodoNSjRQ==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+    
 </head>
+
 <body>
+
+
     <header>
 
         <div class="perfil">
-
             <a href="/profile">
                 <img src="../../static/imagem/foto_perfil.webp" alt="Foto de Perfil">
                 <div class="perfil_info">    
@@ -23,18 +40,41 @@
                     <h2>Curso: {{ curso}}</h2>    
                 </div>    
             </a>
-
         </div>
 
         <nav>
-
             <ul>
-                <li><a href="/home">Início</a></li>
-                <li><a href="/messages">Mensagens</a></li>
-                <li><a href="/subject">Disciplinas</a></li>
-                <li><a href="/logout">Sair</a></li>
+                <li>
+                    <a href="/home">
+                        <span class="fa-solid fa-house"></span> 
+                        <span>Ínicio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/messages">
+                        <span class="fa-solid fa-bell"></span> 
+                        <span>Notificações</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/subject">
+                        <span class="fa-solid fa-book"></span> 
+                        <span>Minhas Disciplinas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/insights">
+                        <span class="fa-solid fa-file-lines"></span> 
+                        <span>Relatórios</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/logout">
+                        <span class="fa-solid fa-right-from-bracket"></span> 
+                        <span>Sair</span>
+                    </a>
+                </li>
             </ul>
-
         </nav>
     
     </header>

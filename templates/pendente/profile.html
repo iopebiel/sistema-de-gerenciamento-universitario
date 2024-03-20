@@ -9,49 +9,95 @@
     <link rel="stylesheet" type="text/css" href="../../static/config/styles/pendente/profile.css">
 
     <title>Meu perfil</title>
+
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css" integrity="sha512-jQcpw1zDugORx3f2JtUxXbX/Si4ktq488bmUvGB8Tz9BtlsEYN9hkN7SuaKlHa+4ME95k+hLfrn0mbYCrY/g/w==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css" 
+    integrity="sha512-eBxzDWX6OiszkLv4+rzUiTP3FgBnDMJeDVkdN3PiCYjZZIUhdWu5aoBJEay8IiDSW+3womeUhVFRZ29c37S8tA==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/brands.min.css" 
+    integrity="sha512-ym1f+T15aiJGZ1y6zs1XEpr8qheyBcOPqjFYNf2UfRmfIt5Pdsp7SD5O74fmsFB+rxxO6ejRqiooutodoNSjRQ==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+
 </head>
 
 <body>
     
     <header>
 
-        <div class="perfil">
-            <a href="/profile">
-                <img src="../../static/imagem/foto_perfil.webp" alt="Foto de Perfil">
-                <div class="perfil_info">    
-                    <h1>{{ nome }}</h1> 
-                    <h2>Curso: {{ curso}}</h2>    
-                </div>    
-            </a>
+        <header>
+
+            <div class="perfil">
+                <a href="/profile">
+                    <img src="../../static/imagem/foto_perfil.webp" alt="Foto de Perfil">
+                    <div class="perfil_info">    
+                        <h1>{{ nome }}</h1> 
+                        <h2>Curso: {{ curso}}</h2>    
+                    </div>    
+                </a>
+            </div>
+    
+            <nav>
+                <ul>
+                    <li>
+                        <a href="/home">
+                            <span class="fa-solid fa-house"></span> 
+                            <span>Ínicio</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/messages">
+                            <span class="fa-solid fa-bell"></span> 
+                            <span>Notificações</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/subject">
+                            <span class="fa-solid fa-book"></span> 
+                            <span>Minhas Disciplinas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/insights">
+                            <span class="fa-solid fa-file-lines"></span> 
+                            <span>Relatórios</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/logout">
+                            <span class="fa-solid fa-right-from-bracket"></span> 
+                            <span>Sair</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        
+        </header>
+    <div class="content">
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for message in messages %}
+                        <div class="{{ category}}">{{ message}}</div>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1 style="flex: 80%; margin: 0; padding: 10px; background-color: #424141; color: #fff;">Meu perfil</h1>
+            <button onclick="abrirEditor()" style="flex: 20%; cursor: pointer; margin-left: 10px;">✏️ Editar</button>
         </div>
 
-        <nav>
-            <ul>
-                <li><a href="/home">Início</a></li>
-                <li><a href="/messages">Mensagens</a></li>
-                <li><a href="/subject">Disciplinas</a></li>
-                <li><a href="/logout">Sair</a></li>
-            </ul>
-        </nav>
-    
-    </header>
-
-    <div class="content">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <h1 style="flex: 80%; margin: 0; padding: 10px; background-color: #424141; color: #fff;">Meu perfil</h1>
-                <button onclick="abrirEditor()" style="flex: 20%; cursor: pointer; margin-left: 10px;">✏️ Editar</button>
-            </div>
         <div>
             <div>
-                    {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                        <ul class="flashes">
-                        {% for message in messages %}
-                            <div class="{{ category}}">{{ message}}</div>
-                        {% endfor %}
-                        </ul>
-                    {% endif %}
-                    {% endwith %}
                 <h2>Nome: {{ usuario[1] }}</h2>
                 <p>Email: {{ usuario[2] }}</p>
                 <p>Senha: *********</p>
@@ -60,35 +106,38 @@
                 <p>Semestre: {{ usuario[5] }}</p>            
             </div>
         </div>
+
     </div>
         <div class="content">
-        <h1>Informações Adicionais</h1>   
-            <div>
-                <p>Número de Prontuário: {{ usuario[0] }}</p>
-                <p>Unidade: {{ usuario[6] }}</p>
+            <h1>Informações Adicionais</h1>   
+                <div>
+                    <p>Número de Prontuário: {{ usuario[0] }}</p>
+                    <p>Unidade: {{ usuario[6] }}</p>
+                </div>
+                
+                <!-- Modal para edição de perfil -->
+                <div id="modalEditor" class="modal">
+                    <div class="modal-content">
+                        <div class="content editor-container">
+                            <h1>Editar Informações</h1>
+                            <form id="edit-form" action="/profile/atualizar" method="POST">
+                                <label for="novoNome">Nome:</label>
+                                <input type="text" id="novoNome" name="novoNome" value="{{ usuario[1] }}"required>
+                                <label for="novoEmail">Email:</label>
+                                <input type="text" id="novoEmail" name="novoEmail" value="{{ usuario[2] }}"required>
+                                <label for="novoCurso">Curso:</label>
+                                <input type="text" id="novoCurso" name="novoCurso" value="{{ usuario[4] }}"required>
+                                <label for="novoSemestre">Semestre:</label>
+                                <input type="text" id="novoSemestre" name="novoSemestre" value="{{ usuario[5] }}" required>
+                                <!-- Adicione mais campos de edição conforme necessário -->
+                                <button type="submit">Salvar</button>
+                                <button type="button" onclick="fecharEditor()">Cancelar</button>
+                            </form>
+                        </div>
             </div>
             
-            <!-- Modal para edição de perfil -->
-            <div id="modalEditor" class="modal">
-                <div class="modal-content">
-                    <div class="content editor-container">
-                        <h1>Editar Informações</h1>
-                        <form id="edit-form" action="/profile/atualizar" method="POST">
-                            <label for="novoNome">Nome:</label>
-                            <input type="text" id="novoNome" name="novoNome" value="{{ usuario[1] }}"required>
-                            <label for="novoEmail">Email:</label>
-                            <input type="text" id="novoEmail" name="novoEmail" value="{{ usuario[2] }}"required>
-                            <label for="novoCurso">Curso:</label>
-                            <input type="text" id="novoCurso" name="novoCurso" value="{{ usuario[4] }}"required>
-                            <label for="novoSemestre">Semestre:</label>
-                            <input type="text" id="novoSemestre" name="novoSemestre" value="{{ usuario[5] }}" required>
-                            <!-- Adicione mais campos de edição conforme necessário -->
-                            <button type="submit">Salvar</button>
-                            <button type="button" onclick="fecharEditor()">Cancelar</button>
-                        </form>
-                    </div>
-               </div>
-            </div>
+        </div>
+
             <div class="modal" id="alterarSenhaModal">
                 <div class="modal-content">
                     <h2>Alterar Senha</h2>
@@ -110,5 +159,5 @@
 
 </body>
 
-<script src="static/config/scripts/profile.js"></script>
+<script src="../../static/config/scripts/profile.js"></script>
 </html>
