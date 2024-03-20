@@ -12,6 +12,7 @@ body {
     border: 1px solid black;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    align-self: center;
 }
 
 .form-container h1 {
@@ -23,7 +24,7 @@ body {
     display: grid;
 }
 
-.form-container .form-group .input-container, .form-container .form-group form {
+.form-container .form-group .input-container {
     display: grid;
 }
 

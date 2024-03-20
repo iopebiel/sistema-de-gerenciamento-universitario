@@ -190,7 +190,7 @@ def login():
 #-----REDEFINIR SENHA-----
 
 
-@app.route('/codemail', methods=['POST'])
+@app.route('/codeEmail', methods=['POST'])
 def codeEmail():    
     email = request.form.get('email')
     session['usuario'] = email

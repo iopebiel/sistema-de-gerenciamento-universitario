@@ -3,21 +3,21 @@ body {
     min-height: 100vh;
     background-color: #388dfd;
 }
-.form-container .flashes {
+.flashes {
     font-size: 18px;
     align-self: center;
     padding: 5px 0;
 }
 
-.form-container .flashes .danger {
+.flashes .danger {
     color: #ff0000;
 }
 
-.form-container .flashes .alert {
+.flashes .alert {
     color: #ffff00;
 }
 
-.form-container .flashes .success {
+.flashes .success {
     color: #00ff00;
 }
 
@@ -92,6 +92,3 @@ button:hover {
     background-color: #0056b3;
 }
 
-.hidden {
-    display: none;
-}
