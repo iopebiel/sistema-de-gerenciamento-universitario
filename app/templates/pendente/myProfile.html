@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../../static/styles/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../static/styles/body-header.css">
+    <link rel="stylesheet" type="text/css" href="../../static/styles/pendente/home.css">
+    <link rel="stylesheet" type="text/css" href="../../static/styles/pendente/profile.css">
+
+    <title>Meu perfil</title>
+
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css" integrity="sha512-jQcpw1zDugORx3f2JtUxXbX/Si4ktq488bmUvGB8Tz9BtlsEYN9hkN7SuaKlHa+4ME95k+hLfrn0mbYCrY/g/w==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css" 
+    integrity="sha512-eBxzDWX6OiszkLv4+rzUiTP3FgBnDMJeDVkdN3PiCYjZZIUhdWu5aoBJEay8IiDSW+3womeUhVFRZ29c37S8tA==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/brands.min.css" 
+    integrity="sha512-ym1f+T15aiJGZ1y6zs1XEpr8qheyBcOPqjFYNf2UfRmfIt5Pdsp7SD5O74fmsFB+rxxO6ejRqiooutodoNSjRQ==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+
+</head>
+
+<body>
+
+    <header>
+
+        <div class="perfil">
+            <a href="/myProfile">
+                <img src="../../static/image/foto_perfil.webp" alt="Foto de Perfil">
+                <div class="perfil_info">
+                    <h1>{{ user['name'] }}</h1>
+                    <h2>Curso: {{ user['course'] }}</h2>
+                </div>
+            </a>
+        </div>
+
+        <nav>
+            <ul>
+                <li>
+                    <a href="/home">
+                        <span class="fa-solid fa-house"></span>
+                        <span>Ínicio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/mySubject">
+                        <span class="fa-solid fa-book"></span>
+                        <span>Minhas Disciplinas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/task">
+                        <span class="fa-solid fa-file-lines"></span>
+                        <span>Tarefas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/logout">
+                        <span class="fa-solid fa-right-from-bracket"></span> 
+                        <span>Sair</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    
+    </header>
+
+    <div class="content">
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for message in messages %}
+                        <div class="{{ category}}">{{ message}}</div>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h1 style="flex: 80%; margin: 0; padding: 10px; background-color: #424141; color: #fff;">Meu perfil</h1>
+            <button onclick="showModal()" style="flex: 20%; cursor: pointer; margin-left: 10px;">✏️ Editar</button>
+        </div>
+            
+            <h2>Nome: {{ user['name'] }}</h2>
+            <p>Email: {{ user['email'] }}</p>
+            <p>Senha: *********</p>
+            <button onclick="abrirAlterarSenha()" style="width: 20%; background-color: #ccc; color: #fff; cursor: pointer; margin-left: 10px; margin-bottom: 0px;">Alterar Senha</button>
+            <p>Curso: {{ user['course'] }}</p>
+            <p>Semestre: {{ user['semester'] }}</p>
+    </div>
+
+    <div class="content">
+        <h1>Informações Adicionais</h1>   
+           
+        <div>
+            <p>Número de Prontuário: {{ user['record'] }}</p>
+            <p>Unidade: {{ user['unit'] }}</p>
+        </div>
+        
+        <div id="modalEditor" class="modal">
+            <div class="modal-content">
+                <div class="content editor-container">
+                    <h1>Editar Informações</h1>
+                    <form id="edit-form" action="/myProfile/update" method="POST">
+                        <label for="newName">Nome:</label>
+                        <input type="text" id="newName" name="newName" value="{{ user['name'] }}"required>
+                        <label for="newEmail">Email:</label>
+                        <input type="text" id="newEmail" name="newEmail" value="{{ user['email'] }}"required>
+                        <label for="newCourse">Curso:</label>
+                        <input type="text" id="newCourse" name="newCourse" value="{{ user['course'] }}"required>
+                        <label for="newSemester">Semestre:</label>
+                        <input type="text" id="newSemester" name="newSemester" value="{{ user['semester'] }}" required>
+                        <button type="submit">Salvar</button>
+                        <button type="button" onclick="closeModal()">Cancelar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="alterarSenhaModal">
+        <div class="modal-content">
+            <h2>Alterar Senha</h2>
+            <form id="alterar-senha-form" action="/myProfile/updatepassword" method="POST">
+                <label for="oldPassword">Senha Atual</label>
+                <input type="password" id="oldPassword" name="oldPassword" required>
+    
+                <label for="newPassword">Nova Senha</label>
+                <input type="password" id="newPassword" name="newPassword" required>
+    
+                <label for="confirmPassword">Confirmar Nova Senha</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+    
+                <button type="submit" onclick="enviarAlteracaoSenha()">Alterar Senha</button>
+                <button type="button" onclick="fecharAlterarSenha()">Fechar</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+<script src="../../static/scripts/dynamic.js"></script>
+</html>

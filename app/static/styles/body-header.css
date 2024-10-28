@@ -96,3 +96,21 @@ button:hover {
     display: none;
 }
 
+.button {
+    border: 1px white solid;
+    background-color: #007bff;
+    color: #fff;
+}
+
+.submit-button {
+    margin: 20px 0;
+    font-size: 20px;
+    padding: 15px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cancel-button {
+    background-color: #ccc;
+}
