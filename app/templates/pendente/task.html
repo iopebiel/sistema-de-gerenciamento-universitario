@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Início</title>
+    
+    <link rel="stylesheet" href="../../static/styles/reset.css">
+    <link rel="stylesheet" href="../../static/styles/body-header.css">
+    <link rel="stylesheet" href="../../static/styles/pendente/home.css">
+    <link rel="stylesheet" href="../../static/styles/pendente/subject.css">
+
+
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css" integrity="sha512-jQcpw1zDugORx3f2JtUxXbX/Si4ktq488bmUvGB8Tz9BtlsEYN9hkN7SuaKlHa+4ME95k+hLfrn0mbYCrY/g/w==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css" 
+    integrity="sha512-eBxzDWX6OiszkLv4+rzUiTP3FgBnDMJeDVkdN3PiCYjZZIUhdWu5aoBJEay8IiDSW+3womeUhVFRZ29c37S8tA==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/brands.min.css" 
+    integrity="sha512-ym1f+T15aiJGZ1y6zs1XEpr8qheyBcOPqjFYNf2UfRmfIt5Pdsp7SD5O74fmsFB+rxxO6ejRqiooutodoNSjRQ==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+
+</head>
+
+<body>
+
+    <header>
+
+        <div class="perfil">
+            <a href="/myProfile">
+                <img src="../../static/image/foto_perfil.webp" alt="Foto de Perfil">
+                <div class="perfil_info">
+                    <h1>{{ name }}</h1>
+                    <h2>Curso: {{ course }}</h2>
+                </div>
+            </a>
+        </div>
+
+        <nav>
+            <ul>
+                <li>
+                    <a href="/home">
+                        <span class="fa-solid fa-house"></span>
+                        <span>Ínicio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/mySubject">
+                        <span class="fa-solid fa-book"></span>
+                        <span>Minhas Disciplinas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/task">
+                        <span class="fa-solid fa-file-lines"></span>
+                        <span>Tarefas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/logout">
+                        <span class="fa-solid fa-right-from-bracket"></span> 
+                        <span>Sair</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    
+    </header>
+
+    <div class="content">
+        
+        <h2>AGENDA</h2>
+        <p>Meus compromissos com prazo de entrega!</p>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for message in messages %}
+                        <div class="{{ category}}">{{ message}}</div>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <div class="title-button">
+            <h2>Tarefas e entregas</h2>
+            <a onclick="" class="interative-button button"><span class="fa-solid fa-plus"></span></a>
+        </div>
+
+        <div class="section">    
+
+                {% if not lembretes %}
+                    <p>Logo a opção de lembretes de suas aulas estarão disponíveis por aqui.</p>
+                {% endif %}
+                
+                <table>
+                    <tr>
+                        <td>
+                            <h4>Nome</h4>                          
+                        </td>
+                        <td>
+                            <p>Prazo</p>
+                        </td>
+                        <td>
+                            <p>Disciplina</p>
+                        </td>
+                        <td>
+                            <p>Status</p>
+                        </td>
+                    </tr>
+                {%for lembrete in lembretes %}
+                    <tr>
+                        <td>
+                            <h4>{{ lembrete['nome'] }}</h4>                          
+                        </td>
+                        <td>
+                            <p>{{ lembrete['prazo'] }}</p>
+                        </td>
+                        <td>
+                            <p>{{ lembrete['disciplina'] }}</p>
+                        </td>
+                        <td>
+                            <p>{{ lembrete['status'] }}</p>
+                        </td>
+                    </tr>
+                {%endfor%}
+                </table>
+            </div>
+
+        </div>
+    
+    </div>
+
+</body>
+
+
+<script src="../../static/scripts/dynamic.js"></script>
+
+</html>

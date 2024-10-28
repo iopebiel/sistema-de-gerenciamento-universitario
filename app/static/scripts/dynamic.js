@@ -1,10 +1,10 @@
 
-function abrirEditor() {
+function showModal() {
     var modal = document.getElementById("modalEditor");
     modal.style.display = "block";
 }
 
-function fecharEditor() {
+function closeModal() {
     var modal = document.getElementById("modalEditor");
     modal.style.display = "none";
 }

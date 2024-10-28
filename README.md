@@ -35,6 +35,9 @@ Para o desenvolvimento deste site utilizei as seguintes tecnologias:
 
 ---
 
+## Requisitos de Instalação
+Ao executar o projeto localmente, certifique-se de ter as dependências listadas no arquivo ./requirements.txt instaladas.
+
 ## Autor
 
 <table>
