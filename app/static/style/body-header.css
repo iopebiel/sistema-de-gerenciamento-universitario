@@ -3,21 +3,21 @@ body {
     min-height: 100vh;
     background-color: #388dfd;
 }
-.flashes {
+.flash {
     font-size: 18px;
     align-self: center;
     padding: 5px 0;
 }
 
-.flashes .danger {
+.danger {
     color: #ff0000;
 }
 
-.flashes .alert {
+.alert {
     color: #ffff00;
 }
 
-.flashes .success {
+.success {
     color: #00ff00;
 }
 

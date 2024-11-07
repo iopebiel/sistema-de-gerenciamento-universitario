@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../../static/styles/reset.css">
-    <link rel="stylesheet" type="text/css" href="../../static/styles/body-header.css">
-    <link rel="stylesheet" type="text/css" href="../../static/styles/pendente/home.css">
-    <link rel="stylesheet" type="text/css" href="../../static/styles/pendente/profile.css">
+    <link rel="stylesheet" type="text/css" href="../../static/style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../../static/style/body-header.css">
+    <link rel="stylesheet" type="text/css" href="../../static/style/pendente/home.css">
+    <link rel="stylesheet" type="text/css" href="../../static/style/pendente/profile.css">
 
     <title>Meu perfil</title>
 
@@ -33,7 +33,7 @@
 
         <div class="perfil">
             <a href="/myProfile">
-                <img src="../../static/image/foto_perfil.webp" alt="Foto de Perfil">
+                <img src="../../static/image/profile_pic.webp" alt="Foto de Perfil">
                 <div class="perfil_info">
                     <h1>{{ user['name'] }}</h1>
                     <h2>Curso: {{ user['course'] }}</h2>
@@ -76,9 +76,9 @@
         
         {% with messages = get_flashed_messages() %}
             {% if messages %}
-                <ul class="flashes">
+                <ul class="flash">
                     {% for message in messages %}
-                        <div class="{{ category}}">{{ message}}</div>
+                        <p class={{ category }}>{{ message}}</p>
                     {% endfor %}
                 </ul>
             {% endif %}
@@ -86,13 +86,13 @@
 
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <h1 style="flex: 80%; margin: 0; padding: 10px; background-color: #424141; color: #fff;">Meu perfil</h1>
-            <button onclick="showModal()" style="flex: 20%; cursor: pointer; margin-left: 10px;">✏️ Editar</button>
+            <button onclick="showModal()" style="flex: 20%; cursor: pointer; margin-left: 10px;">Editar</button>
         </div>
             
             <h2>Nome: {{ user['name'] }}</h2>
             <p>Email: {{ user['email'] }}</p>
             <p>Senha: *********</p>
-            <button onclick="abrirAlterarSenha()" style="width: 20%; background-color: #ccc; color: #fff; cursor: pointer; margin-left: 10px; margin-bottom: 0px;">Alterar Senha</button>
+            <button onclick="showChangePassword()" style="width: 20%; background-color: #ccc; color: #fff; cursor: pointer; margin-left: 10px; margin-bottom: 0px;">Alterar Senha</button>
             <p>Curso: {{ user['course'] }}</p>
             <p>Semestre: {{ user['semester'] }}</p>
     </div>
@@ -139,13 +139,13 @@
                 <label for="confirmPassword">Confirmar Nova Senha</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" required>
     
-                <button type="submit" onclick="enviarAlteracaoSenha()">Alterar Senha</button>
-                <button type="button" onclick="fecharAlterarSenha()">Fechar</button>
+                <button type="submit" onclick="changePassword()">Alterar Senha</button>
+                <button type="button" onclick="closeChangePassword()">Fechar</button>
             </form>
         </div>
     </div>
 
 </body>
 
-<script src="../../static/scripts/dynamic.js"></script>
+<script src="../../static/script/dynamic.js"></script>
 </html>

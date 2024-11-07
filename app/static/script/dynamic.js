@@ -10,17 +10,17 @@ function closeModal() {
 }
 
 
-function abrirAlterarSenha() {
+function showChangePassword() {
     var modal = document.getElementById('alterarSenhaModal');
     modal.style.display = 'block';
 }
 
-function fecharAlterarSenha() {
+function closeChangePassword() {
     var modal = document.getElementById('alterarSenhaModal');
     modal.style.display = 'none';
 }
 
-function enviarAlteracaoSenha() {
+function changePassword() {
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('alterar-senha-form');
 
@@ -28,16 +28,16 @@ document.addEventListener('DOMContentLoaded', function () {
         form.addEventListener('submit', function (event) {
             event.preventDefault();
 
-            const senhaAtual = document.getElementById('senha_atual').value;
-            const novaSenha = document.getElementById('nova_senha').value;
-            const confirmarSenha = document.getElementById('confirmar_senha').value;
+            const oldPassword = document.getElementById('senha_atual').value;
+            const newPassword = document.getElementById('nova_senha').value;
+            const confirmPassword = document.getElementById('confirmar_senha').value;
 
-            if (senhaAtual === '' || novaSenha === '' || confirmarSenha === '') {
+            if (oldPassword === '' || newPassword === '' || confirmPassword === '') {
                 alert('Preencha todos os campos.');
-                return;
+                return false;
             }
 
-            if (novaSenha !== confirmarSenha) {
+            if (newPassword !== confirmPassword) {
                 alert('A nova senha e a confirmação da senha não coincidem.');
                 return;
             }

@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../static/styles/reset.css">
-    <link rel="stylesheet" href="../../static/styles/body-header.css">
-    <link rel="stylesheet" href="../../static/styles/pendente/home.css">
-    <link rel="stylesheet" href="../../static/styles/pendente/subject.css">
+    <link rel="stylesheet" href="../../static/style/reset.css">
+    <link rel="stylesheet" href="../../static/style/body-header.css">
+    <link rel="stylesheet" href="../../static/style/pendente/home.css">
+    <link rel="stylesheet" href="../../static/style/pendente/subject.css">
 
     <title>Adicionar Disciplina</title>
 
@@ -33,7 +33,7 @@
 
         <div class="perfil">
             <a href="/myProfile">
-                <img src="../../static/image/foto_perfil.webp" alt="Foto de Perfil">
+                <img src="../../static/image/profile_pic.webp" alt="Foto de Perfil">
                 <div class="perfil_info">    
                     <h1>{{ name }}</h1>
                     <h2>Curso: {{ course }}</h2>
@@ -77,9 +77,9 @@
         <h1>Adicionar Disciplina</h1>
         {% with messages = get_flashed_messages() %}
             {% if messages %}
-                <ul class="flashes">
+                <ul class="flash">
                     {% for message in messages %}
-                        <div class="{{ category}}">{{ message}}</div>
+                        <p class={{ category }}>{{ message}}</p>
                     {% endfor %}
                 </ul>
             {% endif %}

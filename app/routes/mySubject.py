@@ -5,7 +5,7 @@ from app.model import Subject, db
 from ..utils import checkRecordStudentSubject, fetchAllSubjects, getPostgresConnection, closePostgresConnection, \
     fetchUserHeaderInformations, getStudentIdByEmail
 
-mySubject = Blueprint('subject', __name__, template_folder='../templates', static_folder='../static')
+mySubject = Blueprint('mySubject', __name__, template_folder='../templates', static_folder='../static')
 
 @mySubject.route('/mySubject')
 def subject():
@@ -87,7 +87,7 @@ def subject_delete():
     closePostgresConnection(connection_bd, cursor_bd)
     flash('Disciplina arquivada com sucesso.', 'success')
 
-    return redirect('/subject')
+    return redirect('/mySubject')
 
 
 @mySubject.route('/mySubject/update', methods=['POST'])
