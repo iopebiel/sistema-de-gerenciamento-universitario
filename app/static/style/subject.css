@@ -82,12 +82,6 @@
     margin-right: 12px;
 }
 
-.button {
-    border: 1px white solid;
-    background-color: #007bff;
-    color: #fff;
-}
-
 .subjectForm {
     display: flex;
     flex-direction: column;

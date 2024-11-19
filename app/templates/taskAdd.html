@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<meta charset="UTF-8">
-    
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Início</title>
-    
-    <link rel="stylesheet" href="../../static/style/reset.css">
-    <link rel="stylesheet" href="../../static/style/body-header.css">
-    <link rel="stylesheet" href="../../static/style/pendente/home.css">
-    <link rel="stylesheet" href="../../static/style/pendente/subject.css">
+    <link rel="stylesheet" href="../static/style/reset.css">
+    <link rel="stylesheet" href="../static/style/body-header.css">
+    <link rel="stylesheet" href="../static/style/home.css">
+    <link rel="stylesheet" href="../static/style/task.css">
 
+    <title>Adicionar Disciplina</title>
 
     <link rel="stylesheet" 
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css" integrity="sha512-jQcpw1zDugORx3f2JtUxXbX/Si4ktq488bmUvGB8Tz9BtlsEYN9hkN7SuaKlHa+4ME95k+hLfrn0mbYCrY/g/w==" 
@@ -27,7 +24,7 @@
     integrity="sha512-ym1f+T15aiJGZ1y6zs1XEpr8qheyBcOPqjFYNf2UfRmfIt5Pdsp7SD5O74fmsFB+rxxO6ejRqiooutodoNSjRQ==" 
     crossorigin="anonymous" 
     referrerpolicy="no-referrer" />
-
+    
 </head>
 
 <body>
@@ -36,10 +33,10 @@
 
         <div class="perfil">
             <a href="/myProfile">
-                <img src="../../static/image/profile_pic.webp" alt="Foto de Perfil">
-                <div class="perfil_info">
-                    <h1>{{ name }}</h1>
-                    <h2>Curso: {{ course }}</h2>
+                <img src="../static/image/profile_pic.webp" alt="Foto de Perfil">
+                <div class="perfil_info">    
+                    <h1>{{ user_info['name'] }}</h1>
+                    <h2>Curso: {{ user_info['course'] }}</h2>
                 </div>
             </a>
         </div>
@@ -77,6 +74,7 @@
 
     <div class="content">
 
+        <h1>Adicionar Disciplina</h1>
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 <ul class="flash">
@@ -87,60 +85,39 @@
             {% endif %}
         {% endwith %}
 
-        <div class="title-button">
-            <h2>Tarefas e entregas</h2>
-            <a onclick="" class="interative-button button"><span class="fa-solid fa-plus"></span></a>
-        </div>
+        <form action="/task/add" method="post">
+            <div class="taskForm">
+                <div class="section">
+                    <h3>Informações Gerais da Tarefa:</h3>
 
-        <div class="section">    
+                    <label for="title">Título de sua nova Tarefa:</label>
+                    <input type="text" id="title" name="title" required>
 
-            <table>
-                <tr>
-                    <td>
-                        <h4>Nome</h4>
-                    </td>
-                    <td>
-                        <p>Prazo</p>
-                    </td>
-                    <td>
-                        <p>Disciplina</p>
-                    </td>
-                    <td>
-                        <p>Status</p>
-                    </td>
-                </tr>
+                    <label for="studentsubjectid">Disciplina:</label>
+                    <select id="studentsubjectid" name="studentsubjectid">
+                        {% for subject in subjects %}
+                        <option value="{{subject['id']}}">{{subject['name']}}</option>
+                        {% endfor %}
+                    </select>
+        
+                </div>
 
-                <tr>
-                    {% if not lembretes %}
-                        <p>Logo a opção de lembretes de suas aulas estarão disponíveis por aqui.</p>
-                    {% endif %}
-                </tr>
+                <div class="section">
+                    <h3>Selecione o dia e horário de prazo para sua tarefa:</h3>
 
-                <tr>
-                    {%for lembrete in lembretes %}
-                        <td>
-                            <h4>{{ lembrete['nome'] }}</h4>
-                        </td>
-                        <td>
-                            <p>{{ lembrete['prazo'] }}</p>
-                        </td>
-                        <td>
-                            <p>{{ lembrete['disciplina'] }}</p>
-                        </td>
-                        <td>
-                            <p>{{ lembrete['status'] }}</p>
-                        </td>
-                    {%endfor%}
-                </tr>
-            </table>
+                    <label for="deadline">Data de agendamento:</label>
+                    <input type="datetime-local" id="deadline" name="deadline" required>
 
-        </div>
+                    <label for="description">Descreva o que será necessário realizar na tarefa:</label>
+                    <input id="description" name="description">
+
+                    <br>
+                    <button type="submit" class="button submit-button">Adicionar Disciplina</button>
+                </div>
+            </div>
+        </form>
 
     </div>
 
 </body>
-
-
-<script src="../../static/script/dynamic.js"></script>
-
 </html>

@@ -26,7 +26,7 @@ def home():
 
     tasks = fetchAllTasks(student_id)
 
-    return render_template('/pendente/home.html',
+    return render_template('/home.html',
                            user=user_info,
                            subjects=active_subjects,
                            tarefas=tasks)

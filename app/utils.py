@@ -183,7 +183,7 @@ def fetchAllTasks(student_id):
     cursor = connection.cursor()
 
     cursor.execute("""
-        SELECT id, name, studentsubjectid, insertiondate, deadline, grade, description, active
+        SELECT id, title, studentsubjectid, insertiondate, deadline, grade, description, complete
         FROM task
         WHERE studentsubjectid IN (
             SELECT id
@@ -197,17 +197,17 @@ def fetchAllTasks(student_id):
     task_data = []
 
     for row in results:
-        id, name, studentsubjectid, insertiondate, deadline, grade, description, active = row
+        id, title, studentsubjectid, insertiondate, deadline, grade, description, complete = row
 
         task_object = {
             "id": id,
-            "name": name,
+            "title": title,
             "studentsubjectid": studentsubjectid,
             "insertiondate": insertiondate,
             "deadline": deadline,
             "grade": grade,
             "description": description,
-            "active": active
+            "complete": complete
         }
 
         task_data.append(task_object)

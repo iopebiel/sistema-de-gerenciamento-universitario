@@ -41,10 +41,10 @@ class Task(db.Model):
     __tablename__ = 'task'
     
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    name = db.Column(db.String(60), nullable=False)
+    title = db.Column(db.String(60), nullable=False)
     studentsubjectid = db.Column(db.Integer, db.ForeignKey('student_subject.id'))
     insertiondate = db.Column(db.DateTime, nullable=False, server_default=func.now())
     deadline = db.Column(db.DateTime)
     grade = db.Column(db.Float)
     description = db.Column(db.String(500))
-    active = db.Column(db.Boolean, nullable=False)
+    complete = db.Column(db.Boolean, nullable=False)

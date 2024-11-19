@@ -18,7 +18,7 @@ def subject():
     if user_info:
         user_name, user_course = user_info['name'], user_info['course']
         subjects = fetchAllSubjects(email)
-        return render_template('/pendente/mySubject.html', name=user_name, course=user_course, email=email, subjects=subjects)
+        return render_template('/mySubject.html', name=user_name, course=user_course, email=email, subjects=subjects)
 
 
 @mySubject.route('/mySubject/add', methods=['GET', 'POST'])
@@ -57,7 +57,7 @@ def subject_add():
             except Exception as e:
                 db.session.rollback()
                 flash("Erro ao salvar no banco de dados: " + str(e), "danger")
-                return render_template('pendente/mySubject.html')
+                return render_template('/mySubject.html')
 
             cursor_bd.execute('SELECT id FROM subject WHERE code = %s OR name = %s', (subject_code, subject_name))
             subject_id = cursor_bd.fetchone()
@@ -66,7 +66,7 @@ def subject_add():
             checkRecordStudentSubject(user_email, subject_id)
 
     user_info = fetchUserHeaderInformations(session['user'])
-    return render_template('/pendente/subjectAdd.html', email=session['user'], name=user_info['name'], course=user_info['course'])
+    return render_template('/subjectAdd.html', email=session['user'], name=user_info['name'], course=user_info['course'])
 
 
 @mySubject.route('/mySubject/archive', methods=['POST'])
