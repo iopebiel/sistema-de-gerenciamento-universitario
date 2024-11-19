@@ -5,7 +5,7 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Início</title>
+    <title>Minhas Tarefas</title>
     
     <link rel="stylesheet" href="../static/style/reset.css">
     <link rel="stylesheet" href="../static/style/body-header.css">
@@ -83,7 +83,7 @@
                 {% if messages %}
                     <ul class="flash">
                         {% for message in messages %}
-                            <p class={{ category }}>{{ message}}</p>
+                            <p class="{{ category }}">{{ message}}</p>
                         {% endfor %}
                     </ul>
                 {% endif %}
@@ -104,7 +104,7 @@
                                 <p>Código da matrícula disciplina: {{ task['studentsubjectid'] }}</p>
                                 <p>Prazo: {{ task['deadline'] }}</p>
                                 <p>Descrição: {{ task['description'] }}</p>
-                                <p>Tarefa completa? {% if task['complete'] == true %}Sim{%else%}Não{%endif%}</p>
+                                <p>Tarefa está completa? {% if task['complete'] == true %}<span class="success">Sim</span>{%else%}<span class="danger">Não</span>{%endif%}</p>
                             </div>
                             <br>
                             <div class="buttons-action">
@@ -112,11 +112,11 @@
                                     <input type=hidden value="{{ task['id'] }}" id="selectedTask"  name="selectedTask" />
                                     <button type=submit  class="fa-solid fa-box-archive interative-button"></button>
                                 </form>
-                                <button type="button" onclick="showModal()" class="fa-solid fa-pen interative-button"></button>
+                                <button type="button" onclick="showModal({{ task['id'] }})" class="fa-solid fa-pen interative-button"></button>
                             </div>
                         </li>
 
-                        <div id="modalEditor" class="modal">
+                        <div id="modalEditor-{{ task['id'] }}" class="modal">
                             <div class="modal-content">
                                 <div class="content editor-container">
 
@@ -139,7 +139,7 @@
                                             <input type="number" id="grade" name="grade" value="{{ task['grade'] }}" min="0" max="10" required>
 
                                             <div>
-                                                <label for="complete">Matricula Ativa:</label>
+                                                <label for="complete">Atividade está completa?</label>
                                                 <select id="complete" name="complete">
                                                     <option value=true {% if task['complete'] == true %}selected{% endif %}>Sim</option>
                                                     <option value=false {% if task['complete'] == false %}selected{% endif %}>Não</option>
@@ -148,7 +148,7 @@
                                         </div>
                                         <br>
                                         <button class="button submit-button" type="submit">Salvar</button>
-                                        <button class="cancel-button  submit-button" type="button" onclick="closeModal()">Cancelar</button>
+                                        <button class="cancel-button  submit-button" type="button" onclick="closeModal({{ task['id'] }})">Cancelar</button>
                                     </form>
 
                                 </div>

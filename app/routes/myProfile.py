@@ -65,7 +65,7 @@ def updatePassword():
                 new_password_hash = generate_password_hash(new_password, method='pbkdf2:sha256')
                 updatePasswordDatabase(user_email, new_password_hash)
                 flash("Senha alterada com sucesso.", "success")
-                return redirect('/profile')
+                return redirect('/myProfile')
             else:
                 flash("Senha atual incorreta. Tente novamente.", "danger")
 

@@ -29,4 +29,4 @@ def home():
     return render_template('/home.html',
                            user=user_info,
                            subjects=active_subjects,
-                           tarefas=tasks)
+                           tasks=tasks)

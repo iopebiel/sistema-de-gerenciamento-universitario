@@ -1,11 +1,11 @@
 
-function showModal() {
-    var modal = document.getElementById("modalEditor");
+function showModal(id) {
+    var modal = document.getElementById(`modalEditor-${id}`);
     modal.style.display = "block";
 }
 
-function closeModal() {
-    var modal = document.getElementById("modalEditor");
+function closeModal(id) {
+    var modal = document.getElementById(`modalEditor-${id}`);
     modal.style.display = "none";
 }
 
