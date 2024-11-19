@@ -106,7 +106,7 @@ def task_update():
     connection_bd.commit()
     closePostgresConnection(connection_bd, cursor_bd)
 
-    flash('Disciplina atualizada com sucesso.', 'success')
+    flash('Tarefa atualizada com sucesso.', 'success')
     return redirect('/task')
 
 #

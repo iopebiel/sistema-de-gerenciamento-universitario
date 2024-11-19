@@ -12,8 +12,8 @@ function showStep() {
 }
 
 function checkCode() {
-    var codigoInserido = document.getElementById('codigo').value;
-    var codigoGerado = {codigo}; 
+    var codigoInserido = document.getElementById('code_user').value;
+    var codigoGerado = '{{ code }}';
     if (codigoInserido === codigoGerado) {
         showStep(step3);
     } else {

@@ -57,7 +57,7 @@ def subject_add():
             except Exception as e:
                 db.session.rollback()
                 flash("Erro ao salvar no banco de dados: " + str(e), "danger")
-                return render_template('/mySubject.html')
+                return redirect('/mySubject')
 
             cursor_bd.execute('SELECT id FROM subject WHERE code = %s OR name = %s', (subject_code, subject_name))
             subject_id = cursor_bd.fetchone()

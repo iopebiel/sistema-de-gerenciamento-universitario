@@ -118,10 +118,10 @@
                 <a href="/task">
                     <h2>Tarefas e entregas</h2>
                 </a>
-                {% if tarefas %}
+                {% if tasks %}
                     <ul>
-                        {% for tarefa in tarefas %}
-                            <li>{{ tarefa['title'] }} - Prazo: {{ tarefa['due_date'] }}</li>
+                        {% for task in tasks %}
+                            <li>{{ task['title'] }} - Prazo: {{ task['deadline'] }}</li>
                         {% endfor %}
                     </ul>
                 {% else %}

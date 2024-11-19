@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Disciplinas</title>
+    <title>Minhas Disciplinas</title>
     
     <link rel="stylesheet" href="../static/style/reset.css">
     <link rel="stylesheet" href="../static/style/body-header.css">
@@ -82,7 +82,7 @@
                 {% if messages %}
                     <ul class="flash">
                         {% for message in messages %}
-                            <p class={{ category }}>{{ message}}</p>
+                            <p class="{{ category }}">{{ message}}</p>
                         {% endfor %}
                     </ul>
                 {% endif %}
@@ -104,7 +104,7 @@
                                 <p>Professor: {{ subject['teacher'] }}</p>
                                 <p>Horário: {{ subject['day'] }}, {{ subject['schedule'] }}</p>
                                 <p>Carga Horaria: {{ subject['totalclasses'] }} horas.</p>
-                                <p>Matricula Ativa: {% if subject['active'] == true %}Sim{%else%}Não{%endif%}</p>
+                                <p>Matricula Ativa: {% if subject['active'] == true %}<span class="success">Sim</span>{%else%}<span class="danger">Não</span>{%endif%}</p>
                             </div>
                             <br>
                             <div class="buttons-action">
@@ -113,11 +113,11 @@
                                     <button type=submit  class="fa-solid fa-box-archive interative-button"></button>
                                 </form>
                                 <button class="fa-solid fa-file-lines interative-button"><a href="/task"></a></button>
-                                <button type="button" onclick="showModal()" class="fa-solid fa-pen interative-button"></button>
+                                <button type="button" onclick="showModal({{ subject['id'] }})" class="fa-solid fa-pen interative-button"></button>
                             </div>
                         </li>
 
-                        <div id="modalEditor" class="modal">
+                        <div id="modalEditor-{{ subject['id'] }}" class="modal">
                             <div class="modal-content">
                                 <div class="content editor-container">
                                     <h1>Editar Informações</h1>
@@ -184,14 +184,14 @@
                                                     <div>
                                                         <label for="active">Matricula Ativa:</label>
                                                         <select id="active" name="active">
-                                                            <option value=true {% if subject['active'] == true %}selected{% endif %}>Sim</option>
-                                                            <option value=false {% if subject['active'] == false %}selected{% endif %}>Não</option>
+                                                            <option value=true {% if subject['active'] == true %}selected{%endif%}>Sim</option>
+                                                            <option value=false {% if subject['active'] == false %}selected{%endif%}>Não</option>
                                                         </select>
                                                     </div>
                                             </div>
                                         <br>
                                         <button class="button submit-button" type="submit">Salvar</button>
-                                        <button class="button cancel-button  submit-button" type="button" onclick="closeModal()">Cancelar</button>
+                                        <button class="button cancel-button  submit-button" type="button" onclick="closeModal({{ subject['id'] }})">Cancelar</button>
                                         </form>
                                 </div>
                             </div>
