@@ -7,10 +7,10 @@
     
     <title>Início</title>
     
-    <link rel="stylesheet" href="../../static/styles/reset.css">
-    <link rel="stylesheet" href="../../static/styles/body-header.css">
-    <link rel="stylesheet" href="../../static/styles/pendente/home.css">
-    <link rel="stylesheet" href="../../static/styles/pendente/subject.css">
+    <link rel="stylesheet" href="../../static/style/reset.css">
+    <link rel="stylesheet" href="../../static/style/body-header.css">
+    <link rel="stylesheet" href="../../static/style/pendente/home.css">
+    <link rel="stylesheet" href="../../static/style/pendente/subject.css">
 
 
     <link rel="stylesheet" 
@@ -36,7 +36,7 @@
 
         <div class="perfil">
             <a href="/myProfile">
-                <img src="../../static/image/foto_perfil.webp" alt="Foto de Perfil">
+                <img src="../../static/image/profile_pic.webp" alt="Foto de Perfil">
                 <div class="perfil_info">
                     <h1>{{ name }}</h1>
                     <h2>Curso: {{ course }}</h2>
@@ -76,15 +76,12 @@
     </header>
 
     <div class="content">
-        
-        <h2>AGENDA</h2>
-        <p>Meus compromissos com prazo de entrega!</p>
 
         {% with messages = get_flashed_messages() %}
             {% if messages %}
-                <ul class="flashes">
+                <ul class="flash">
                     {% for message in messages %}
-                        <div class="{{ category}}">{{ message}}</div>
+                        <p class={{ category }}>{{ message}}</p>
                     {% endfor %}
                 </ul>
             {% endif %}
@@ -97,29 +94,32 @@
 
         <div class="section">    
 
-                {% if not lembretes %}
-                    <p>Logo a opção de lembretes de suas aulas estarão disponíveis por aqui.</p>
-                {% endif %}
-                
-                <table>
-                    <tr>
+            <table>
+                <tr>
+                    <td>
+                        <h4>Nome</h4>
+                    </td>
+                    <td>
+                        <p>Prazo</p>
+                    </td>
+                    <td>
+                        <p>Disciplina</p>
+                    </td>
+                    <td>
+                        <p>Status</p>
+                    </td>
+                </tr>
+
+                <tr>
+                    {% if not lembretes %}
+                        <p>Logo a opção de lembretes de suas aulas estarão disponíveis por aqui.</p>
+                    {% endif %}
+                </tr>
+
+                <tr>
+                    {%for lembrete in lembretes %}
                         <td>
-                            <h4>Nome</h4>                          
-                        </td>
-                        <td>
-                            <p>Prazo</p>
-                        </td>
-                        <td>
-                            <p>Disciplina</p>
-                        </td>
-                        <td>
-                            <p>Status</p>
-                        </td>
-                    </tr>
-                {%for lembrete in lembretes %}
-                    <tr>
-                        <td>
-                            <h4>{{ lembrete['nome'] }}</h4>                          
+                            <h4>{{ lembrete['nome'] }}</h4>
                         </td>
                         <td>
                             <p>{{ lembrete['prazo'] }}</p>
@@ -130,18 +130,17 @@
                         <td>
                             <p>{{ lembrete['status'] }}</p>
                         </td>
-                    </tr>
-                {%endfor%}
-                </table>
-            </div>
+                    {%endfor%}
+                </tr>
+            </table>
 
         </div>
-    
+
     </div>
 
 </body>
 
 
-<script src="../../static/scripts/dynamic.js"></script>
+<script src="../../static/script/dynamic.js"></script>
 
 </html>

@@ -1,15 +1,14 @@
 const step1 = document.getElementById('step1-form');
 const step2 = document.getElementById('step2-form');
 const step3 = document.getElementById('step3-form');
-const step =
+let stepSelected = document.getElementById('{{ step }}')
 
 function showStep() {
     step1.classList.add('hidden');
     step2.classList.add('hidden');
     step3.classList.add('hidden');
 
-    console.log(step)
-    step.classList.remove('hidden');
+    stepSelected.classList.remove('hidden');
 }
 
 function checkCode() {

@@ -95,9 +95,9 @@ def changePassword():
             return redirect('/login')
 
         flash("As senhas não coincidem.", "danger")
-        return render_template('changePassword.html', step='step3')
+        return render_template('changePassword.html', step="step3-form")
 
-    return render_template('changePassword.html', step='step1')
+    return render_template('changePassword.html', step="step1-form")
 
 
 @auth.route('/codeEmail', methods=['POST'])
@@ -111,7 +111,7 @@ def codeEmail():
 Seu código de verificação é: {verification_code}
 Acesse a página de verificação, insira seu código e redefina sua senha.
 ''')
-    return render_template('changePassword.html', code=verification_code, step='step2')
+    return render_template('changePassword.html', code=verification_code, step='step2-form')
 
 
 @auth.route('/logout')

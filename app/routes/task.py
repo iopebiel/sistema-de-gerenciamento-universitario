@@ -1,6 +1,6 @@
 from flask import redirect, render_template, session
 from app import closePostgresConnection, getPostgresConnection
-from app.utils import fetchAllSubjects, fetchAllTasks, fetchUserHeaderInformations
+from app.utils import fetchAllSubjects, fetchAllTasks, fetchUserHeaderInformations, getStudentIdByEmail
 from flask import Blueprint
 
 task = Blueprint('task', __name__, template_folder='../templates', static_folder='../static')
@@ -15,11 +15,13 @@ def get_tasks():
 
     if student_info:
         student_name, student_course = student_info['name'], student_info['course']
+        student_id = getStudentIdByEmail(student_email)
         subjects = fetchAllSubjects(student_email)
+
 
         tasks = []
         for subject in subjects:
-            tasks.append(fetchAllTasks(student_info['id'], subject['id']))
+            tasks.append(fetchAllTasks(student_id))
 
         return render_template('/pendente/task.html', name=student_name, course=student_course, email=student_email,
                                subjects=subjects, tasks=tasks)
