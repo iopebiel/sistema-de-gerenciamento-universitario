@@ -98,6 +98,7 @@ button:hover {
 
 .button {
     border: 1px white solid;
+    padding: 5px;
     background-color: #007bff;
     color: #fff;
 }

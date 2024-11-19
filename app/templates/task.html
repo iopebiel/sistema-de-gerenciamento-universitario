@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Início</title>
+    
+    <link rel="stylesheet" href="../static/style/reset.css">
+    <link rel="stylesheet" href="../static/style/body-header.css">
+    <link rel="stylesheet" href="../static/style/home.css">
+    <link rel="stylesheet" href="../static/style/subject.css">
+
+
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css" integrity="sha512-jQcpw1zDugORx3f2JtUxXbX/Si4ktq488bmUvGB8Tz9BtlsEYN9hkN7SuaKlHa+4ME95k+hLfrn0mbYCrY/g/w==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/fontawesome.min.css" 
+    integrity="sha512-eBxzDWX6OiszkLv4+rzUiTP3FgBnDMJeDVkdN3PiCYjZZIUhdWu5aoBJEay8IiDSW+3womeUhVFRZ29c37S8tA==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/brands.min.css" 
+    integrity="sha512-ym1f+T15aiJGZ1y6zs1XEpr8qheyBcOPqjFYNf2UfRmfIt5Pdsp7SD5O74fmsFB+rxxO6ejRqiooutodoNSjRQ==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
+
+</head>
+
+<body>
+
+    <header>
+
+        <div class="perfil">
+            <a href="/myProfile">
+                <img src="../static/image/profile_pic.webp" alt="Foto de Perfil">
+                <div class="perfil_info">
+                    <h1>{{ user_info['name'] }}</h1>
+                    <h2>Curso: {{ user_info['course'] }}</h2>
+                </div>
+            </a>
+        </div>
+
+        <nav>
+            <ul>
+                <li>
+                    <a href="/home">
+                        <span class="fa-solid fa-house"></span>
+                        <span>Ínicio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/mySubject">
+                        <span class="fa-solid fa-book"></span>
+                        <span>Minhas Disciplinas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/task">
+                        <span class="fa-solid fa-file-lines"></span>
+                        <span>Tarefas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/logout">
+                        <span class="fa-solid fa-right-from-bracket"></span> 
+                        <span>Sair</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    
+    </header>
+
+    <main>
+       <div class="content">
+
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul class="flash">
+                        {% for message in messages %}
+                            <p class={{ category }}>{{ message}}</p>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+            <div class="title-button">
+                <h1>Minhas Tarefas</h1>
+                <a href="/task/add" class="interative-button button"><span class="fa-solid fa-plus"></span></a>
+            </div>
+
+           {% if not tasks %}
+               <p >Adicione novas tarefas para suas matérias e elas irão aparecer aqui!</p>
+           {% else %}
+               <ul class="lista-subjects">
+                    {% for task in tasks %}
+                        <li class="subjects">
+                            <div class="details">
+                                <h3>{{ task['title'] }}</h3>
+                                <p>Código da matrícula disciplina: {{ task['studentsubjectid'] }}</p>
+                                <p>Prazo: {{ task['deadline'] }}</p>
+                                <p>Descrição: {{ task['description'] }}</p>
+                                <p>Tarefa completa? {% if task['complete'] == true %}Sim{%else%}Não{%endif%}</p>
+                            </div>
+                            <br>
+                            <div class="buttons-action">
+                                <form action="/task/archive" method=post>
+                                    <input type=hidden value="{{ task['id'] }}" id="selectedTask"  name="selectedTask" />
+                                    <button type=submit  class="fa-solid fa-box-archive interative-button"></button>
+                                </form>
+                                <button type="button" onclick="showModal()" class="fa-solid fa-pen interative-button"></button>
+                            </div>
+                        </li>
+
+                        <div id="modalEditor" class="modal">
+                            <div class="modal-content">
+                                <div class="content editor-container">
+
+                                    <h1>Editar Informações</h1>
+
+                                    <form id="edit-form" action="/task/update" method="POST">
+                                        <div class="section">
+                                            <input type="hidden" id="id" name="id" value="{{ task['id'] }}">
+
+                                            <label for="title">Título da Tarefa:</label>
+                                            <input id="title" name="title" value="{{ task['title'] }}" required>
+
+                                            <label for="deadline">Prazo:</label>
+                                            <input type="datetime-local" id="deadline" name="deadline" value="{{ task['deadline'] }}" required>
+
+                                            <label for="description">Descrição da tarafa:</label>
+                                            <input id="description" name="description" value="{{ task['description'] }}">
+
+                                            <label for="grade">Nota:</label>
+                                            <input type="number" id="grade" name="grade" value="{{ task['grade'] }}" min="0" max="10" required>
+
+                                            <div>
+                                                <label for="complete">Matricula Ativa:</label>
+                                                <select id="complete" name="complete">
+                                                    <option value=true {% if task['complete'] == true %}selected{% endif %}>Sim</option>
+                                                    <option value=false {% if task['complete'] == false %}selected{% endif %}>Não</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <button class="button submit-button" type="submit">Salvar</button>
+                                        <button class="cancel-button  submit-button" type="button" onclick="closeModal()">Cancelar</button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </ul>
+           {% endif %}
+        </div>
+    </main>
+
+</body>
+<script src="../static/script/dynamic.js"></script>
+</html>

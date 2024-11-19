@@ -14,7 +14,7 @@ def profile():
         user_data = fetchAllUserData(user_email)
 
         if user_data:
-            return render_template('/pendente/myProfile.html', user=user_data)
+            return render_template('/myProfile.html', user=user_data)
         else:
             return redirect('/login')
     else:

@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../static/style/reset.css">
     <link rel="stylesheet" type="text/css" href="../../static/style/body-header.css">
-    <link rel="stylesheet" type="text/css" href="../../static/style/pendente/home.css">
-    <link rel="stylesheet" type="text/css" href="../../static/style/pendente/profile.css">
+    <link rel="stylesheet" type="text/css" href="../../static/style/home.css">
+    <link rel="stylesheet" type="text/css" href="../../static/style/profile.css">
 
     <title>Meu perfil</title>
 
@@ -86,13 +86,13 @@
 
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <h1 style="flex: 80%; margin: 0; padding: 10px; background-color: #424141; color: #fff;">Meu perfil</h1>
-            <button onclick="showModal()" style="flex: 20%; cursor: pointer; margin-left: 10px;">Editar</button>
+            <button class="button" onclick="showModal()" style="flex: 20%; cursor: pointer; margin-left: 10px;">Editar</button>
         </div>
             
             <h2>Nome: {{ user['name'] }}</h2>
             <p>Email: {{ user['email'] }}</p>
             <p>Senha: *********</p>
-            <button onclick="showChangePassword()" style="width: 20%; background-color: #ccc; color: #fff; cursor: pointer; margin-left: 10px; margin-bottom: 0px;">Alterar Senha</button>
+            <button class="button" onclick="showChangePassword()" style="width: 20%; background-color: #ccc; color: #fff; cursor: pointer; margin-left: 10px; margin-bottom: 0px;">Alterar Senha</button>
             <p>Curso: {{ user['course'] }}</p>
             <p>Semestre: {{ user['semester'] }}</p>
     </div>
@@ -109,7 +109,7 @@
             <div class="modal-content">
                 <div class="content editor-container">
                     <h1>Editar Informações</h1>
-                    <form id="edit-form" action="/myProfile/update" method="POST">
+                    <form id="edit-form" action="/myProfile/update" class="editor-container" method="POST">
                         <label for="newName">Nome:</label>
                         <input type="text" id="newName" name="newName" value="{{ user['name'] }}"required>
                         <label for="newEmail">Email:</label>
@@ -118,30 +118,33 @@
                         <input type="text" id="newCourse" name="newCourse" value="{{ user['course'] }}"required>
                         <label for="newSemester">Semestre:</label>
                         <input type="text" id="newSemester" name="newSemester" value="{{ user['semester'] }}" required>
-                        <button type="submit">Salvar</button>
-                        <button type="button" onclick="closeModal()">Cancelar</button>
+                        <button class="button submit-button" type="submit">Salvar</button>
+                        <button class="button cancel-button submit-button" type="button" onclick="closeModal()">Cancelar</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal" id="alterarSenhaModal">
+    <div id="alterarSenhaModal" class="modal" >
         <div class="modal-content">
-            <h2>Alterar Senha</h2>
-            <form id="alterar-senha-form" action="/myProfile/updatepassword" method="POST">
-                <label for="oldPassword">Senha Atual</label>
-                <input type="password" id="oldPassword" name="oldPassword" required>
-    
-                <label for="newPassword">Nova Senha</label>
-                <input type="password" id="newPassword" name="newPassword" required>
-    
-                <label for="confirmPassword">Confirmar Nova Senha</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" required>
-    
-                <button type="submit" onclick="changePassword()">Alterar Senha</button>
-                <button type="button" onclick="closeChangePassword()">Fechar</button>
-            </form>
+            <div class="content editor-container">
+                <h2>Alterar Senha</h2>
+                <form id="alterar-senha-form" action="/myProfile/updatepassword" class="editor-container" method="POST">
+                    <label for="oldPassword">Senha Atual</label>
+                    <input type="password" id="oldPassword" name="oldPassword" required>
+
+                    <label for="newPassword">Nova Senha</label>
+                    <input type="password" id="newPassword" name="newPassword" required>
+
+                    <label for="confirmPassword">Confirmar Nova Senha</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <div class="buttons-action">
+                        <button class="button submit-button" type="submit" onclick="changePassword()">Alterar Senha</button>
+                        <button class="button cancel-button submit-button" type="button" onclick="closeChangePassword()">Fechar</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
