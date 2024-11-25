@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../static/style/reset.css">
     <link rel="stylesheet" href="../static/style/body-header.css">
     <link rel="stylesheet" href="../static/style/home.css">
-    <link rel="stylesheet" href="../static/style/subject.css">
+    <link rel="stylesheet" href="../static/style/tabled-content.css">
 
     <title>Adicionar Disciplina</title>
 
@@ -31,10 +31,10 @@
 
     <header>
 
-        <div class="perfil">
+        <div class="profile">
             <a href="/myProfile">
                 <img src="../static/image/profile_pic.webp" alt="Foto de Perfil">
-                <div class="perfil_info">    
+                <div class="profile_info">
                     <h1>{{ name }}</h1>
                     <h2>Curso: {{ course }}</h2>
                 </div>
@@ -73,8 +73,6 @@
     </header>
 
     <div class="content">
-
-        <h1>Adicionar Disciplina</h1>
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 <ul class="flash">
@@ -85,8 +83,10 @@
             {% endif %}
         {% endwith %}
 
+        <h1>Adicionar Disciplina</h1>
+
         <form action="/mySubject/add" method="post">
-            <div class="subjectForm">
+            <div class="formAdd">
                 <div class="section">
                     <h3>Informações Gerais da disciplina:</h3>
 
@@ -139,9 +139,9 @@
                             <span class="radio-label">4h0min por semana.(6 aulas)</span>
                         </label>
                     </div>
-                    <br>
-                    <button type="submit" class="button submit-button">Adicionar Disciplina</button>
                 </div>
+                <br>
+                <button type="submit" class="button submit-button">Adicionar Disciplina</button>
             </div>
         </form>
 

@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../static/style/reset.css">
     <link rel="stylesheet" href="../static/style/body-header.css">
     <link rel="stylesheet" href="../static/style/home.css">
-    <link rel="stylesheet" href="../static/style/task.css">
+    <link rel="stylesheet" href="../static/style/tabled-content.css">
 
     <title>Adicionar Tarefas</title>
 
@@ -31,10 +31,10 @@
 
     <header>
 
-        <div class="perfil">
+        <div class="profile">
             <a href="/myProfile">
                 <img src="../static/image/profile_pic.webp" alt="Foto de Perfil">
-                <div class="perfil_info">    
+                <div class="profile_info">
                     <h1>{{ user_info['name'] }}</h1>
                     <h2>Curso: {{ user_info['course'] }}</h2>
                 </div>
@@ -74,7 +74,6 @@
 
     <div class="content">
 
-        <h1>Adicionar Disciplina</h1>
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 <ul class="flash">
@@ -84,9 +83,10 @@
                 </ul>
             {% endif %}
         {% endwith %}
+        <h1>Adicionar Tarefa</h1>
 
         <form action="/task/add" method="post">
-            <div class="taskForm">
+            <div class="formAdd">
                 <div class="section">
                     <h3>Informações Gerais da Tarefa:</h3>
 
@@ -109,11 +109,10 @@
                     <input type="datetime-local" id="deadline" name="deadline" required>
 
                     <label for="description">Descreva o que será necessário realizar na tarefa:</label>
-                    <input id="description" name="description">
-
-                    <br>
-                    <button type="submit" class="button submit-button">Adicionar Disciplina</button>
+                    <textarea id="description" name="description" rows="7"></textarea>
                 </div>
+                <br>
+                <button type="submit" class="button submit-button">Adicionar Disciplina</button>
             </div>
         </form>
 

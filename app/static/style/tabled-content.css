@@ -2,18 +2,7 @@
     top: 2px;
 }
 
-.section {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    background-color: #fff;
-    margin: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-
-.subjects {
+.table-row {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -30,10 +19,10 @@
 
 .radio-container {
     display: flex;
-    align-items: left;
-    align-items: flex-start; 
+    align-items: flex-start;
     flex-direction: row; 
-    flex-wrap: nowrap; 
+    flex-wrap: nowrap;
+    margin: 5px;
 }
 
 .radio-label {
@@ -44,9 +33,8 @@
     cursor: pointer;
     user-select: none;
     display: flex;
-    align-items: left;
-    align-items: flex-start; 
-    margin-right: 5px; 
+    align-items: flex-start;
+    margin-right: 5px;
 }
 
 .custom-radio input {
@@ -82,37 +70,8 @@
     margin-right: 12px;
 }
 
-.subjectForm {
+.formAdd {
     display: flex;
     flex-direction: column;
 }
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.7);
-}
-
-.modal-content {
-    display: contents;
-    background-color: #fff;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 70%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
-
-.close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    cursor: pointer;
-}

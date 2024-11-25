@@ -91,14 +91,14 @@ ul li {
     margin: 0 auto;
 }
 .table-container {
-            overflow-x: auto; /* Torna a tabela rolável horizontalmente */
+    overflow-x: auto;
  }
 
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    overflow-x: auto; /* Torna a tabela rolável horizontalmente */
+    overflow-x: auto;
 }
 
 th, td {
@@ -111,12 +111,7 @@ th {
     background-color: #f0f0f0;
 }
 @media screen and (max-width: 600px) {
-    /* Estilo para telas menores (menos de 600px de largura) */
     table {
-        font-size: 14px; /* Reduz o tamanho da fonte */
+        font-size: 14px;
     }
-}
-
-.hidden {
-display: none;
 }

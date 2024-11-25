@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+<head>
 
-<meta charset="UTF-8">
-    
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Minhas Tarefas</title>
     
-    <link rel="stylesheet" href="../static/style/reset.css">
-    <link rel="stylesheet" href="../static/style/body-header.css">
-    <link rel="stylesheet" href="../static/style/home.css">
-    <link rel="stylesheet" href="../static/style/subject.css">
+    <link rel="stylesheet" type="text/css" href="../static/style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../static/style/body-header.css">
+    <link rel="stylesheet" type="text/css" href="../static/style/home.css">
+    <link rel="stylesheet" type="text/css" href="../static/style/tabled-content.css">
+    <link rel="stylesheet" type="text/css" href="../../static/style/modal.css">
 
 
     <link rel="stylesheet" 
@@ -34,10 +35,10 @@
 
     <header>
 
-        <div class="perfil">
+        <div class="profile">
             <a href="/myProfile">
                 <img src="../static/image/profile_pic.webp" alt="Foto de Perfil">
-                <div class="perfil_info">
+                <div class="profile_info">
                     <h1>{{ user_info['name'] }}</h1>
                     <h2>Curso: {{ user_info['course'] }}</h2>
                 </div>
@@ -96,9 +97,9 @@
            {% if not tasks %}
                <p >Adicione novas tarefas para suas matérias e elas irão aparecer aqui!</p>
            {% else %}
-               <ul class="lista-subjects">
+               <ul class="list-table">
                     {% for task in tasks %}
-                        <li class="subjects">
+                        <li class="table-row">
                             <div class="details">
                                 <h3>{{ task['title'] }}</h3>
                                 <p>Código da matrícula disciplina: {{ task['studentsubjectid'] }}</p>
@@ -118,39 +119,37 @@
 
                         <div id="modalEditor-{{ task['id'] }}" class="modal">
                             <div class="modal-content">
-                                <div class="content editor-container">
-
-                                    <h1>Editar Informações</h1>
-
+                                <div class="editor-container">
                                     <form id="edit-form" action="/task/update" method="POST">
                                         <div class="section">
-                                            <input type="hidden" id="id" name="id" value="{{ task['id'] }}">
+                                         <h1>Editar Informações</h1>
 
-                                            <label for="title">Título da Tarefa:</label>
-                                            <input id="title" name="title" value="{{ task['title'] }}" required>
+                                        <input type="hidden" id="id" name="id" value="{{ task['id'] }}">
 
-                                            <label for="deadline">Prazo:</label>
-                                            <input type="datetime-local" id="deadline" name="deadline" value="{{ task['deadline'] }}" required>
+                                        <label for="title">Título da Tarefa:</label>
+                                        <input id="title" name="title" value="{{ task['title'] }}" required>
 
-                                            <label for="description">Descrição da tarafa:</label>
-                                            <input id="description" name="description" value="{{ task['description'] }}">
+                                        <label for="deadline">Prazo:</label>
+                                        <input type="datetime-local" id="deadline" name="deadline" value="{{ task['deadline'] }}" required>
 
-                                            <label for="grade">Nota:</label>
-                                            <input type="number" id="grade" name="grade" value="{{ task['grade'] }}" min="0" max="10" required>
+                                        <label for="description">Descrição da tarafa:</label>
+                                        <input id="description" name="description" value="{{ task['description'] }}">
 
-                                            <div>
-                                                <label for="complete">Atividade está completa?</label>
-                                                <select id="complete" name="complete">
-                                                    <option value=true {% if task['complete'] == true %}selected{% endif %}>Sim</option>
-                                                    <option value=false {% if task['complete'] == false %}selected{% endif %}>Não</option>
-                                                </select>
-                                            </div>
+                                        <label for="grade">Nota:</label>
+                                        <input type="number" id="grade" name="grade" {% if task['grade'] %} value="{{ task['grade'] }}" {% endif %} min="0" max="10" step=".01">
+
+                                        <div class="selectInput">
+                                            <label for="complete">Atividade está completa?</label>
+                                            <select id="complete" name="complete">
+                                                <option value=true {% if task['complete'] == true %}selected{% endif %}>Sim</option>
+                                                <option value=false {% if task['complete'] == false %}selected{% endif %}>Não</option>
+                                            </select>
                                         </div>
                                         <br>
                                         <button class="button submit-button" type="submit">Salvar</button>
                                         <button class="cancel-button  submit-button" type="button" onclick="closeModal({{ task['id'] }})">Cancelar</button>
+                                        </div>
                                     </form>
-
                                 </div>
                             </div>
                         </div>

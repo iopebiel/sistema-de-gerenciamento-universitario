@@ -16,9 +16,8 @@ def subject():
     user_info = fetchUserHeaderInformations(email)
 
     if user_info:
-        user_name, user_course = user_info['name'], user_info['course']
         subjects = fetchAllSubjects(email)
-        return render_template('/mySubject.html', name=user_name, course=user_course, email=email, subjects=subjects)
+        return render_template('/mySubject.html', user_info=user_info, subjects=subjects)
 
 
 @mySubject.route('/mySubject/add', methods=['GET', 'POST'])

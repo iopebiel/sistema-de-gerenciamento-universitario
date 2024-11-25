@@ -77,7 +77,7 @@ def task_complete():
     connection_bd.commit()
 
     closePostgresConnection(connection_bd, cursor_bd)
-    flash('Disciplina arquivada com sucesso.', 'success')
+    flash('Tarefa arquivada com sucesso.', 'success')
 
     return redirect('/task')
 

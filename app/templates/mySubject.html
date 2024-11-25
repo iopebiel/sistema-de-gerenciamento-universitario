@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Minhas Disciplinas</title>
     
-    <link rel="stylesheet" href="../static/style/reset.css">
-    <link rel="stylesheet" href="../static/style/body-header.css">
-    <link rel="stylesheet" href="../static/style/home.css">
-    <link rel="stylesheet" href="../static/style/subject.css">
+    <link rel="stylesheet" type="text/css" href="../static/style/reset.css">
+    <link rel="stylesheet" type="text/css" href="../static/style/body-header.css">
+    <link rel="stylesheet" type="text/css" href="../static/style/home.css">
+    <link rel="stylesheet" type="text/css" href="../static/style/tabled-content.css">
+    <link rel="stylesheet" type="text/css" href="../../static/style/modal.css">
+
 
     <link rel="stylesheet" 
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/solid.min.css" integrity="sha512-jQcpw1zDugORx3f2JtUxXbX/Si4ktq488bmUvGB8Tz9BtlsEYN9hkN7SuaKlHa+4ME95k+hLfrn0mbYCrY/g/w==" 
@@ -28,16 +30,17 @@
     referrerpolicy="no-referrer" />
 
 </head>
+
 <body>
 
     <header>
 
-        <div class="perfil">
+        <div class="profile">
             <a href="/myProfile">
                 <img src="../static/image/profile_pic.webp" alt="Foto de Perfil">
-                <div class="perfil_info">    
-                    <h1>{{ name }}</h1>
-                    <h2>Curso: {{ course }}</h2>
+                <div class="profile_info">
+                    <h1>{{ user_info['name'] }}</h1>
+                    <h2>Curso: {{ user_info['course'] }}</h2>
                 </div>
             </a>
         </div>
@@ -74,8 +77,7 @@
     </header>
 
     <main>
-
-        <div class="content">
+       <div class="content">
 
             
             {% with messages = get_flashed_messages() %}
@@ -95,9 +97,9 @@
            {% if not subjects %}
                <p >Matricule-se em disciplinas novas e elas irão aparecer aqui!</p>
            {% else %}
-                <ul class="lista-subjects">
+                <ul class="list-table">
                     {% for subject in subjects %}
-                        <li class="subjects">
+                        <li class="table-row">
                             <div class="details">
                                 <h3>{{ subject['name'] }}</h3>
                                 <p>Sigla: {{ subject['code'] }}-{{ subject ['id'] }}</p>
@@ -119,80 +121,80 @@
 
                         <div id="modalEditor-{{ subject['id'] }}" class="modal">
                             <div class="modal-content">
-                                <div class="content editor-container">
-                                    <h1>Editar Informações</h1>
-                                        <form id="edit-form" action="/mySubject/update" method="POST">
-                                            <div class="section">
-                                                <input type="hidden" id="id" name="id" value="{{ subject['id'] }}">
+                                <div class="editor-container">
+                                    <form id="edit-form" action="/mySubject/update" method="POST">
+                                        <div class="section">
+                                            <h1>Editar Informações</h1>
 
-                                                <label for="name">Nome da Disciplina:</label>
-                                                <input type="text" id="name" name="name" value="{{ subject['name'] }}" required>
+                                            <input type="hidden" id="id" name="id" value="{{ subject['id'] }}">
 
-                                                <label for="code">Sigla da Disciplina (3 caracteres):</label>
-                                                <input type="text" id="code" name="code" value="{{ subject['code'] }}" required>
-                                                <small>Deve conter exatamente 3 caracteres para sigla e melhorar processo de busca.</small>
+                                            <label for="name">Nome da Disciplina:</label>
+                                            <input type="text" id="name" name="name" value="{{ subject['name'] }}" required>
 
-                                                <label for="teacher">Professor:</label>
-                                                <input id="teacher" name="teacher" value="{{ subject['teacher'] }}" required>
+                                            <label for="code">Sigla da Disciplina (3 caracteres):</label>
+                                            <input type="text" id="code" name="code" value="{{ subject['code'] }}" required>
+                                            <small>Deve conter exatamente 3 caracteres para sigla e melhorar processo de busca.</small>
 
-                                                <label for="day">Dia da Semana:</label>
-                                                <select id="day" name="day">
-                                                    <option value="Segunda-feira" {% if subject['day'] == "Segunda-feira" %}selected{% endif %}>Segunda-feira</option>
-                                                    <option value="Terça-feira" {% if subject['day'] == "Terça-feira" %}selected{% endif %}>Terça-feira</option>
-                                                    <option value="Quarta-feira" {% if subject['day'] == "Quarta-feira" %}selected{% endif %}>Quarta-feira</option>
-                                                    <option value="Quinta-feira" {% if subject['day'] == "Quinta-feira" %}selected{% endif %}>Quinta-feira</option>
-                                                    <option value="Sexta-feira" {% if subject['day'] == "Sexta-feira" %}selected{% endif %}>Sexta-feira</option>
-                                                    <option value="Sabado" {% if subject['day'] == "Sabado" %}selected{% endif %}>Sábado</option>
-                                                </select>
+                                            <label for="teacher">Professor:</label>
+                                            <input id="teacher" name="teacher" value="{{ subject['teacher'] }}" required>
 
-                                                <label for="schedule">Horário:</label>
-                                                <input type="time" id="schedule" name="schedule" value="{{ subject['schedule'] }}">
+                                            <label for="day">Dia da Semana:</label>
+                                            <select id="day" name="day">
+                                                <option value="Segunda-feira" {% if subject['day'] == "Segunda-feira" %}selected{% endif %}>Segunda-feira</option>
+                                                <option value="Terça-feira" {% if subject['day'] == "Terça-feira" %}selected{% endif %}>Terça-feira</option>
+                                                <option value="Quarta-feira" {% if subject['day'] == "Quarta-feira" %}selected{% endif %}>Quarta-feira</option>
+                                                <option value="Quinta-feira" {% if subject['day'] == "Quinta-feira" %}selected{% endif %}>Quinta-feira</option>
+                                                <option value="Sexta-feira" {% if subject['day'] == "Sexta-feira" %}selected{% endif %}>Sexta-feira</option>
+                                                <option value="Sabado" {% if subject['day'] == "Sabado" %}selected{% endif %}>Sábado</option>
+                                            </select>
 
-                                                <label for="option">Quantidade de aula por dia:</label>
-                                                <div class="radio-container">
-                                                        <label class="custom-radio">
-                                                            {% if subject['classesperday'] == 2 %}
-                                                            <input type="radio" name="option" id="option" value="2" checked>
-                                                            {% else %}
-                                                            <input type="radio" name="option" id="option" value="2">
-                                                            {% endif %}
-                                                            <span class="radio-label">1h40min por semana.(2 aulas)</span>
-                                                        </label>
-                                                    </div>
+                                            <label for="schedule">Horário:</label>
+                                            <input type="time" id="schedule" name="schedule" value="{{ subject['schedule'] }}">
 
-
-                                                    <div class="radio-container">
-                                                        <label class="custom-radio">
-                                                            {% if subject['classesperday'] == 4 %}
-                                                            <input type="radio" name="option" id="option" value="4" checked>
-                                                            {% else %}
-                                                            <input type="radio" name="option" id="option" value="4">
-                                                            {% endif %}
-                                                            <span class="radio-label">3h20min por semana.(4 aulas)</span>
-                                                        </label>
-                                                    </div>
-                                                    <div class="radio-container">
-                                                        <label class="custom-radio">
-                                                            {% if subject['classesperday'] == 6 %}
-                                                            <input type="radio" name="option" id="option" value="6" checked>
-                                                            {% else %}
-                                                            <input type="radio" name="option" id="option" value="6">
-                                                            {% endif %}
-                                                            <span class="radio-label">5h0min por semana.(6 aulas)</span>
-                                                        </label>
-                                                    </div>
-                                                    <div>
-                                                        <label for="active">Matricula Ativa:</label>
-                                                        <select id="active" name="active">
-                                                            <option value=true {% if subject['active'] == true %}selected{%endif%}>Sim</option>
-                                                            <option value=false {% if subject['active'] == false %}selected{%endif%}>Não</option>
-                                                        </select>
-                                                    </div>
+                                            <label for="option">Quantidade de aula por dia:</label>
+                                            <div class="radio-container">
+                                                <label class="custom-radio">
+                                                    {% if subject['classesperday'] == 2 %}
+                                                    <input type="radio" name="option" id="option" value="2" checked>
+                                                    {% else %}
+                                                    <input type="radio" name="option" id="option" value="2">
+                                                    {% endif %}
+                                                    <span class="radio-label">1h40min por semana.(2 aulas)</span>
+                                                </label>
                                             </div>
-                                        <br>
-                                        <button class="button submit-button" type="submit">Salvar</button>
-                                        <button class="button cancel-button  submit-button" type="button" onclick="closeModal({{ subject['id'] }})">Cancelar</button>
-                                        </form>
+
+                                            <div class="radio-container">
+                                                <label class="custom-radio">
+                                                    {% if subject['classesperday'] == 4 %}
+                                                    <input type="radio" name="option" id="option" value="4" checked>
+                                                    {% else %}
+                                                    <input type="radio" name="option" id="option" value="4">
+                                                    {% endif %}
+                                                    <span class="radio-label">3h20min por semana.(4 aulas)</span>
+                                                </label>
+                                            </div>
+                                            <div class="radio-container">
+                                                <label class="custom-radio">
+                                                    {% if subject['classesperday'] == 6 %}
+                                                    <input type="radio" name="option" id="option" value="6" checked>
+                                                    {% else %}
+                                                    <input type="radio" name="option" id="option" value="6">
+                                                    {% endif %}
+                                                    <span class="radio-label">5h0min por semana.(6 aulas)</span>
+                                                </label>
+                                            </div>
+                                            <div class="selectInput">
+                                                <label for="active">Matricula Ativa:</label>
+                                                <select id="active" name="active">
+                                                    <option value=true {% if subject['active'] == true %}selected{%endif%}>Sim</option>
+                                                    <option value=false {% if subject['active'] == false %}selected{%endif%}>Não</option>
+                                                </select>
+                                            </div>
+                                            <br>
+                                            <button class="button submit-button" type="submit">Salvar</button>
+                                            <button class="button cancel-button  submit-button" type="button" onclick="closeModal({{ subject['id'] }})">Cancelar</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
